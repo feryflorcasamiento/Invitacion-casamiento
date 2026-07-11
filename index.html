@@ -1,18 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fernando & Florencia</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <title>Fernando & Florencia | 16.10.2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
+<body>
+  <div id="welcome" class="welcome">
+    <div class="welcome-card">
+      <div class="monogram">F <span>&</span> F</div>
+      <p class="eyebrow">16 · 10 · 2026</p>
+      <h1>Fernando & Florencia</h1>
+      <p class="welcome-text">Nos encantaría compartir con vos una noche inolvidable.</p>
+      <button id="openInvitation" class="primary-button">Abrir invitación</button>
+    </div>
+  </div>
 
-<body style="background:black;color:white;font-family:Arial;text-align:center;padding-top:100px;">
+  <main id="invitation" class="hidden">
+    <section class="hero section">
+      <div class="silver-line"></div>
+      <p class="eyebrow">¡Nos casamos!</p>
+      <h1>Fernando <span>&</span> Florencia</h1>
+      <p class="date">Viernes 16 de octubre de 2026</p>
 
-<h1>🤍 Fernando & Florencia 🤍</h1>
+      <div id="guestGreeting" class="guest-card">
+        <p class="small-label">Invitación para</p>
+        <h2 id="guestNames">Cargando invitados...</h2>
+      </div>
 
-<h2>16 de Octubre de 2026</h2>
+      <div class="countdown" aria-label="Cuenta regresiva">
+        <div><strong id="days">0</strong><span>Días</span></div>
+        <div><strong id="hours">0</strong><span>Horas</span></div>
+        <div><strong id="minutes">0</strong><span>Minutos</span></div>
+        <div><strong id="seconds">0</strong><span>Segundos</span></div>
+      </div>
+    </section>
 
-<p>Nuestra invitación digital está en construcción...</p>
+    <section class="section card">
+      <p class="icon">⛪</p>
+      <p class="eyebrow">Ceremonia</p>
+      <h2>20:00 hs</h2>
+      <p>Iglesia San Francisco Solano<br>Bella Vista</p>
+      <a class="secondary-button" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&query=Iglesia+San+Francisco+Solano+Bella+Vista+Buenos+Aires">
+         Cómo llegar
+      </a>
+    </section>
 
+    <section class="section card">
+      <p class="icon">🥂</p>
+      <p class="eyebrow">Recepción y fiesta</p>
+      <h2>21:00 hs</h2>
+      <p>Eventos Argentinos</p>
+      <a class="secondary-button" target="_blank" rel="noopener"
+         href="https://www.google.com/maps/search/?api=1&query=Eventos+Argentinos+Buenos+Aires">
+         Cómo llegar
+      </a>
+    </section>
+
+    <section class="section split">
+      <article class="card">
+        <p class="icon">👔</p>
+        <p class="eyebrow">Dress code</p>
+        <h2>Elegante sport</h2>
+        <p>El blanco y los tonos muy claros quedan reservados para la novia.</p>
+      </article>
+
+      <article class="card">
+        <p class="icon">🥂</p>
+        <p class="eyebrow">Importante</p>
+        <h2>Solo adultos</h2>
+        <p>Queremos que disfruten con nosotros una noche especial.</p>
+      </article>
+    </section>
+
+    <section class="section card">
+      <p class="icon">🎁</p>
+      <p class="eyebrow">Regalo</p>
+      <h2>Tu presencia es nuestro mejor regalo</h2>
+      <p>Si además querés ayudarnos a comenzar esta nueva etapa, podés hacerlo mediante transferencia.</p>
+      <div class="bank-box">
+        <span id="cbuText">CBU A COMPLETAR</span>
+        <button id="copyCbu" class="copy-button" type="button">Copiar CBU</button>
+      </div>
+    </section>
+
+    <section class="section card">
+      <p class="icon">📸</p>
+      <p class="eyebrow">Instagram</p>
+      <h2>Compartamos los recuerdos</h2>
+      <p>Próximamente agregaremos la cuenta oficial del casamiento.</p>
+      <a id="instagramButton" class="secondary-button disabled" href="#" aria-disabled="true">Ver Instagram</a>
+    </section>
+
+    <section class="section card rsvp-card">
+      <p class="icon">💌</p>
+      <p class="eyebrow">Confirmación</p>
+      <h2>¿Nos acompañan?</h2>
+      <p class="deadline">
+        <strong>La confirmación es obligatoria.</strong><br>
+        Si no recibimos tu respuesta antes del <strong>15 de septiembre de 2026</strong>,
+        entenderemos que no podrán asistir y su lugar será liberado para la organización del evento.
+      </p>
+
+      <form id="rsvpForm">
+        <fieldset id="attendanceOptions">
+          <legend>Seleccioná una opción</legend>
+          <label><input type="radio" name="attendance" value="both" required> Asistimos los dos</label>
+          <label id="onlyGuest1Label"><input type="radio" name="attendance" value="guest1"> Asiste solo el invitado 1</label>
+          <label id="onlyGuest2Label"><input type="radio" name="attendance" value="guest2"> Asiste solo el invitado 2</label>
+          <label><input type="radio" name="attendance" value="none"> No podremos asistir</label>
+        </fieldset>
+
+        <label class="song-label" for="song">🎵 ¿Qué canción no puede faltar en la fiesta?</label>
+        <input id="song" name="song" type="text" maxlength="100" placeholder="Canción y artista" />
+
+        <button id="submitButton" class="primary-button" type="submit">Enviar confirmación</button>
+        <p id="formMessage" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <section class="section final-message">
+      <div class="silver-line"></div>
+      <h2>Gracias por ser parte de nuestra historia</h2>
+      <p>Los esperamos para celebrar juntos.</p>
+      <div class="monogram small">F <span>&</span> F</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
