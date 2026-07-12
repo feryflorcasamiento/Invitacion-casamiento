@@ -17,7 +17,7 @@ $("#openInvitation").addEventListener("click", () => {
   window.scrollTo(0, 0);
 });
 
-function updateCountdown(){
+function updateCountdown() {
   const diff = new Date(CONFIG.weddingDate) - new Date();
   const safe = Math.max(diff, 0);
   $("#days").textContent = Math.floor(safe / 86400000);
@@ -25,46 +25,59 @@ function updateCountdown(){
   $("#minutes").textContent = Math.floor((safe % 3600000) / 60000);
   $("#seconds").textContent = Math.floor((safe % 60000) / 1000);
 }
-updateCountdown(); setInterval(updateCountdown, 1000);
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
 $("#copyAlias").addEventListener("click", async () => {
-  await navigator.clipboard.writeText("FERYFLOR.BODA");
-  $("#copyAlias").textContent = "Alias copiado";
-  setTimeout(() => $("#copyAlias").textContent = "Copiar alias", 1800);
+  try {
+    await navigator.clipboard.writeText("FERYFLOR.BODA");
+    $("#copyAlias").textContent = "Alias copiado";
+    setTimeout(() => $("#copyAlias").textContent = "Copiar alias", 1800);
+  } catch {
+    alert("Alias: FERYFLOR.BODA");
+  }
 });
 
-function displayGuests(data){
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function displayGuests(data) {
   guestData = data;
   const names = data.guests.filter(Boolean);
   $("#guestTitle").textContent = names.length ? names.join(" · ") : "Invitación";
   $("#guestChoices").innerHTML = names.map((name, index) => `
     <div class="guest-choice">
       <h3>${escapeHtml(name)}</h3>
-      <label><input type="radio" name="guest_${index+1}" value="Sí" required> Asiste</label>
-      <label><input type="radio" name="guest_${index+1}" value="No" required> No asiste</label>
-    </div>`).join("");
+      <label><input type="radio" name="guest_${index + 1}" value="Sí" required> Asiste</label>
+      <label><input type="radio" name="guest_${index + 1}" value="No" required> No asiste</label>
+    </div>
+  `).join("");
 }
 
-function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-}
-
-window.receiveGuest = function(response){
-  if(response?.ok) displayGuests(response);
-  else {
+window.receiveGuest = function(response) {
+  if (response?.ok) {
+    displayGuests(response);
+  } else {
     $("#guestTitle").textContent = "Invitación no encontrada";
     $("#rsvpForm").style.display = "none";
   }
 };
 
-function loadGuest(){
-  if(!CONFIG.apiUrl.startsWith("https://script.google.com/")){
-    displayGuests(guestData); // modo de prueba
+function loadGuest() {
+  if (!CONFIG.apiUrl.startsWith("https://script.google.com/")) {
+    displayGuests(guestData);
     return;
   }
+
   const tag = document.createElement("script");
   tag.src = `${CONFIG.apiUrl}?action=getGuest&id=${encodeURIComponent(invitationId)}&callback=receiveGuest`;
-  tag.onerror = () => { $("#guestTitle").textContent = "No pudimos cargar la invitación"; };
+  tag.onerror = () => {
+    $("#guestTitle").textContent = "No pudimos cargar la invitación";
+    $("#rsvpForm").style.display = "none";
+  };
   document.body.appendChild(tag);
 }
 loadGuest();
@@ -73,7 +86,7 @@ $("#rsvpForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   const message = $("#formMessage");
 
-  if(new Date() > new Date(CONFIG.confirmationDeadline)){
+  if (new Date() > new Date(CONFIG.confirmationDeadline)) {
     message.className = "form-message error";
     message.textContent = "El plazo de confirmación finalizó el 15 de agosto de 2026.";
     return;
@@ -81,11 +94,11 @@ $("#rsvpForm").addEventListener("submit", async (event) => {
 
   const activeGuests = guestData.guests.filter(Boolean);
   const attendance = activeGuests.map((_, i) => {
-    const checked = document.querySelector(`input[name="guest_${i+1}"]:checked`);
+    const checked = document.querySelector(`input[name="guest_${i + 1}"]:checked`);
     return checked ? checked.value : "";
   });
 
-  if(attendance.some(value => !value)){
+  if (attendance.some(value => !value)) {
     message.className = "form-message error";
     message.textContent = "Indicá si asiste o no cada persona invitada.";
     return;
@@ -94,29 +107,36 @@ $("#rsvpForm").addEventListener("submit", async (event) => {
   const song = $("#song").value.trim();
   const food = $("#food").value.trim();
   const payload = new URLSearchParams({
-    action:"rsvp", id:guestData.id, song, food,
+    action: "rsvp",
+    id: guestData.id,
+    song,
+    food,
     attendance: JSON.stringify(attendance)
   });
 
   const button = $("#submitRsvp");
-  button.disabled = true; button.textContent = "Guardando...";
+  button.disabled = true;
+  button.textContent = "Guardando...";
 
-  if(CONFIG.apiUrl.startsWith("https://script.google.com/")){
-    try{
-      await fetch(CONFIG.apiUrl, { method:"POST", mode:"no-cors",
-        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-        body:payload.toString()
+  if (CONFIG.apiUrl.startsWith("https://script.google.com/")) {
+    try {
+      await fetch(CONFIG.apiUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body: payload.toString()
       });
-    }catch(e){
+    } catch {
       message.className = "form-message error";
       message.textContent = "No pudimos guardar la respuesta. Probá nuevamente.";
-      button.disabled = false; button.textContent = "Enviar confirmación";
+      button.disabled = false;
+      button.textContent = "Enviar confirmación";
       return;
     }
   }
 
-  const attending = activeGuests.filter((_,i)=>attendance[i]==="Sí");
-  const notAttending = activeGuests.filter((_,i)=>attendance[i]==="No");
+  const attending = activeGuests.filter((_, i) => attendance[i] === "Sí");
+  const notAttending = activeGuests.filter((_, i) => attendance[i] === "No");
   const text = [
     "Hola Flor y Fer, confirmamos nuestra asistencia al casamiento.",
     "",
@@ -126,16 +146,19 @@ $("#rsvpForm").addEventListener("submit", async (event) => {
     food ? "🍽️ Restricciones: " + food : ""
   ].filter(Boolean).join("\n");
 
-  message.className = "form-message success";
-  message.textContent = "¡Gracias por confirmar! Ahora se abrirá WhatsApp con el mensaje listo para enviar.";
-  button.textContent = "Confirmación enviada";
+  $("#sendFlor").href = `https://wa.me/${CONFIG.florWhatsApp}?text=${encodeURIComponent(text)}`;
+  $("#sendFer").href = `https://wa.me/${CONFIG.ferWhatsApp}?text=${encodeURIComponent(text)}`;
 
-  setTimeout(() => {
-    window.open(`https://wa.me/${CONFIG.florWhatsApp}?text=${encodeURIComponent(text)}`, "_blank");
-  }, 900);
+  message.className = "form-message success";
+  message.textContent = "¡Gracias! La respuesta quedó guardada y también se envió al correo del casamiento.";
+  button.textContent = "Confirmación enviada";
+  $("#whatsappChoice").hidden = false;
 });
 
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("visible"));
-}, {threshold:.12});
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("visible");
+  });
+}, { threshold: .12 });
+
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));

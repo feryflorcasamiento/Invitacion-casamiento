@@ -1,28 +1,45 @@
-# Invitación Fernando & Florencia
+# Invitación definitiva · Fernando & Florencia
 
-## Subir a GitHub
-Subí todo el contenido de esta carpeta, incluida la carpeta `assets`, al repositorio conectado con Vercel.
+## Archivos
+Subí a GitHub:
+- `index.html`
+- `styles.css`
+- `script.js`
+- `apps-script.gs`
+- `README.md`
+- la carpeta completa `assets`
 
-## Conectar Google Sheets
-1. En la planilla, verificá que la pestaña se llame `Hoja 1` o cambiá `SHEET_NAME` en `apps-script.gs`.
-2. Usá estas columnas:
-   `ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado`
-3. Abrí `Extensiones > Apps Script`.
-4. Pegá el contenido de `apps-script.gs`.
-5. Elegí `Implementar > Nueva implementación > Aplicación web`.
-6. Ejecutar como: vos.
-7. Quién tiene acceso: cualquier persona.
-8. Copiá la URL que termina en `/exec`.
-9. Abrí `script.js` y reemplazá `PEGAR_URL_DE_APPS_SCRIPT_AQUI`.
+Vercel publicará la actualización automáticamente.
+
+## Estructura exacta de Google Sheets
+La fila 1 debe contener:
+
+`ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado`
+
+## Conectar la invitación con Google Sheets
+1. En Google Sheets abrí `Extensiones > Apps Script`.
+2. Borrá lo que aparezca.
+3. Pegá el contenido de `apps-script.gs`.
+4. Verificá que la pestaña de la planilla se llame `Hoja 1`.
+5. Tocá `Implementar > Nueva implementación`.
+6. Tipo: `Aplicación web`.
+7. Ejecutar como: `Yo`.
+8. Quién tiene acceso: `Cualquier persona`.
+9. Tocá `Implementar`.
+10. Copiá la URL que termina en `/exec`.
+11. En GitHub abrí `script.js`.
+12. Reemplazá `PEGAR_URL_DE_APPS_SCRIPT_AQUI` por esa URL.
+13. Guardá con `Commit changes`.
 
 ## Enlaces personalizados
 Ejemplo:
+
 `https://TU-SITIO.vercel.app/?id=001`
 
-## WhatsApp
+El código `001` corresponde a la fila con ID `001` en Google Sheets.
+
+## Funcionamiento
 Al confirmar:
 - se actualiza Google Sheets;
-- se envía un correo al Gmail del casamiento;
-- se abre WhatsApp de Flor con el mensaje preparado.
-
-También hay botones separados para consultar a Flor o Fernando.
+- se envía un correo a `feryflorcasamiento@gmail.com`;
+- aparecen dos botones para enviar el mensaje por WhatsApp a Florencia o Fernando.
