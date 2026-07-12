@@ -1,175 +1,141 @@
-// 1) Pegá aquí la URL de la aplicación web de Google Apps Script.
-// Ejemplo: https://script.google.com/macros/s/XXXXXXXXXXXX/exec
-const API_URL = "PEGAR_URL_DE_APPS_SCRIPT_AQUI";
-
-// 2) Completaremos estos datos más adelante.
-const CBU = "CBU A COMPLETAR";
-const INSTAGRAM_URL = "";
-
-const weddingDate = new Date("2026-10-16T20:00:00-03:00");
-
-const params = new URLSearchParams(window.location.search);
-const guestId = params.get("id") || "";
-
-const welcome = document.getElementById("welcome");
-const invitation = document.getElementById("invitation");
-const openInvitation = document.getElementById("openInvitation");
-const guestNames = document.getElementById("guestNames");
-const onlyGuest1Label = document.getElementById("onlyGuest1Label");
-const onlyGuest2Label = document.getElementById("onlyGuest2Label");
-const cbuText = document.getElementById("cbuText");
-const instagramButton = document.getElementById("instagramButton");
-const form = document.getElementById("rsvpForm");
-const formMessage = document.getElementById("formMessage");
-const submitButton = document.getElementById("submitButton");
-
-let guestData = {
-  id: guestId,
-  guest1: "Invitado 1",
-  guest2: "Invitado 2"
+const CONFIG = {
+  apiUrl: "PEGAR_URL_DE_APPS_SCRIPT_AQUI",
+  weddingDate: "2026-10-16T20:00:00-03:00",
+  confirmationDeadline: "2026-08-15T23:59:59-03:00",
+  florWhatsApp: "5491132937869",
+  ferWhatsApp: "5491134173998"
 };
 
-openInvitation.addEventListener("click", () => {
-  welcome.classList.add("hidden");
-  invitation.classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+const $ = (selector) => document.querySelector(selector);
+const params = new URLSearchParams(location.search);
+const invitationId = params.get("id") || "001";
+let guestData = { id: invitationId, guests: ["Invitado 1", "Invitado 2", "", ""] };
+
+$("#openInvitation").addEventListener("click", () => {
+  $("#opening").style.display = "none";
+  $("#mainContent").hidden = false;
+  window.scrollTo(0, 0);
 });
 
-function updateCountdown() {
-  const now = new Date();
-  const diff = weddingDate - now;
-
-  if (diff <= 0) {
-    ["days", "hours", "minutes", "seconds"].forEach(id => {
-      document.getElementById(id).textContent = "0";
-    });
-    return;
-  }
-
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
-
-  document.getElementById("days").textContent = days;
-  document.getElementById("hours").textContent = hours;
-  document.getElementById("minutes").textContent = minutes;
-  document.getElementById("seconds").textContent = seconds;
+function updateCountdown(){
+  const diff = new Date(CONFIG.weddingDate) - new Date();
+  const safe = Math.max(diff, 0);
+  $("#days").textContent = Math.floor(safe / 86400000);
+  $("#hours").textContent = Math.floor((safe % 86400000) / 3600000);
+  $("#minutes").textContent = Math.floor((safe % 3600000) / 60000);
+  $("#seconds").textContent = Math.floor((safe % 60000) / 1000);
 }
+updateCountdown(); setInterval(updateCountdown, 1000);
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+$("#copyAlias").addEventListener("click", async () => {
+  await navigator.clipboard.writeText("FERYFLOR.BODA");
+  $("#copyAlias").textContent = "Alias copiado";
+  setTimeout(() => $("#copyAlias").textContent = "Copiar alias", 1800);
+});
 
-function applyGuestData(data) {
+function displayGuests(data){
   guestData = data;
-
-  if (data.guest2) {
-    guestNames.textContent = `${data.guest1} y ${data.guest2}`;
-    onlyGuest1Label.innerHTML = `<input type="radio" name="attendance" value="guest1"> Asiste solo ${data.guest1}`;
-    onlyGuest2Label.innerHTML = `<input type="radio" name="attendance" value="guest2"> Asiste solo ${data.guest2}`;
-  } else {
-    guestNames.textContent = data.guest1;
-    document.querySelector('input[value="both"]').closest("label").style.display = "none";
-    onlyGuest1Label.innerHTML = `<input type="radio" name="attendance" value="guest1"> Sí, asistiré`;
-    onlyGuest2Label.style.display = "none";
-  }
+  const names = data.guests.filter(Boolean);
+  $("#guestTitle").textContent = names.length ? names.join(" · ") : "Invitación";
+  $("#guestChoices").innerHTML = names.map((name, index) => `
+    <div class="guest-choice">
+      <h3>${escapeHtml(name)}</h3>
+      <label><input type="radio" name="guest_${index+1}" value="Sí" required> Asiste</label>
+      <label><input type="radio" name="guest_${index+1}" value="No" required> No asiste</label>
+    </div>`).join("");
 }
 
-window.receiveGuest = function(data) {
-  if (data && data.ok) {
-    applyGuestData(data);
-  } else {
-    guestNames.textContent = "Invitación no encontrada";
-    form.style.display = "none";
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+window.receiveGuest = function(response){
+  if(response?.ok) displayGuests(response);
+  else {
+    $("#guestTitle").textContent = "Invitación no encontrada";
+    $("#rsvpForm").style.display = "none";
   }
 };
 
-function loadGuest() {
-  if (!guestId) {
-    guestNames.textContent = "Falta el código de invitación";
-    form.style.display = "none";
+function loadGuest(){
+  if(!CONFIG.apiUrl.startsWith("https://script.google.com/")){
+    displayGuests(guestData); // modo de prueba
     return;
   }
-
-  if (!API_URL.startsWith("https://script.google.com/")) {
-    guestNames.textContent = "Invitación de prueba";
-    applyGuestData({
-      id: guestId,
-      guest1: "Invitado 1",
-      guest2: "Invitado 2"
-    });
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.src = `${API_URL}?action=getGuest&id=${encodeURIComponent(guestId)}&callback=receiveGuest`;
-  script.onerror = () => {
-    guestNames.textContent = "No pudimos cargar esta invitación";
-    form.style.display = "none";
-  };
-  document.body.appendChild(script);
+  const tag = document.createElement("script");
+  tag.src = `${CONFIG.apiUrl}?action=getGuest&id=${encodeURIComponent(invitationId)}&callback=receiveGuest`;
+  tag.onerror = () => { $("#guestTitle").textContent = "No pudimos cargar la invitación"; };
+  document.body.appendChild(tag);
 }
-
 loadGuest();
 
-cbuText.textContent = CBU;
-
-document.getElementById("copyCbu").addEventListener("click", async () => {
-  if (CBU === "CBU A COMPLETAR") {
-    alert("Todavía falta cargar el CBU.");
-    return;
-  }
-  await navigator.clipboard.writeText(CBU);
-  alert("CBU copiado.");
-});
-
-if (INSTAGRAM_URL) {
-  instagramButton.href = INSTAGRAM_URL;
-  instagramButton.classList.remove("disabled");
-  instagramButton.removeAttribute("aria-disabled");
-}
-
-form.addEventListener("submit", async (event) => {
+$("#rsvpForm").addEventListener("submit", async (event) => {
   event.preventDefault();
+  const message = $("#formMessage");
 
-  const formData = new FormData(form);
-  const attendance = formData.get("attendance");
-  const song = formData.get("song") || "";
-
-  if (!attendance) return;
-
-  if (!API_URL.startsWith("https://script.google.com/")) {
-    formMessage.textContent = "La invitación está en modo de prueba. Falta conectar Google Sheets.";
-    formMessage.className = "form-message error";
+  if(new Date() > new Date(CONFIG.confirmationDeadline)){
+    message.className = "form-message error";
+    message.textContent = "El plazo de confirmación finalizó el 15 de agosto de 2026.";
     return;
   }
 
-  const payload = new URLSearchParams({
-    action: "rsvp",
-    id: guestData.id,
-    attendance,
-    song
+  const activeGuests = guestData.guests.filter(Boolean);
+  const attendance = activeGuests.map((_, i) => {
+    const checked = document.querySelector(`input[name="guest_${i+1}"]:checked`);
+    return checked ? checked.value : "";
   });
 
-  submitButton.disabled = true;
-  submitButton.textContent = "Enviando...";
-
-  try {
-    await fetch(API_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-      body: payload.toString()
-    });
-
-    form.reset();
-    formMessage.textContent = "¡Gracias por confirmar! Estamos muy felices de compartir este día con ustedes.";
-    formMessage.className = "form-message success";
-  } catch (error) {
-    formMessage.textContent = "No pudimos guardar la respuesta. Probá nuevamente.";
-    formMessage.className = "form-message error";
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Enviar confirmación";
+  if(attendance.some(value => !value)){
+    message.className = "form-message error";
+    message.textContent = "Indicá si asiste o no cada persona invitada.";
+    return;
   }
+
+  const song = $("#song").value.trim();
+  const food = $("#food").value.trim();
+  const payload = new URLSearchParams({
+    action:"rsvp", id:guestData.id, song, food,
+    attendance: JSON.stringify(attendance)
+  });
+
+  const button = $("#submitRsvp");
+  button.disabled = true; button.textContent = "Guardando...";
+
+  if(CONFIG.apiUrl.startsWith("https://script.google.com/")){
+    try{
+      await fetch(CONFIG.apiUrl, { method:"POST", mode:"no-cors",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body:payload.toString()
+      });
+    }catch(e){
+      message.className = "form-message error";
+      message.textContent = "No pudimos guardar la respuesta. Probá nuevamente.";
+      button.disabled = false; button.textContent = "Enviar confirmación";
+      return;
+    }
+  }
+
+  const attending = activeGuests.filter((_,i)=>attendance[i]==="Sí");
+  const notAttending = activeGuests.filter((_,i)=>attendance[i]==="No");
+  const text = [
+    "Hola Flor y Fer, confirmamos nuestra asistencia al casamiento.",
+    "",
+    attending.length ? "✅ Asisten: " + attending.join(", ") : "✅ No asistirá ninguna persona de esta invitación.",
+    notAttending.length ? "❌ No asisten: " + notAttending.join(", ") : "",
+    song ? "🎵 Canción: " + song : "",
+    food ? "🍽️ Restricciones: " + food : ""
+  ].filter(Boolean).join("\n");
+
+  message.className = "form-message success";
+  message.textContent = "¡Gracias por confirmar! Ahora se abrirá WhatsApp con el mensaje listo para enviar.";
+  button.textContent = "Confirmación enviada";
+
+  setTimeout(() => {
+    window.open(`https://wa.me/${CONFIG.florWhatsApp}?text=${encodeURIComponent(text)}`, "_blank");
+  }, 900);
 });
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => entry.isIntersecting && entry.target.classList.add("visible"));
+}, {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));

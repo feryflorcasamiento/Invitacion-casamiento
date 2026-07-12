@@ -1,132 +1,100 @@
-// GOOGLE APPS SCRIPT
-// Pegá este código en Extensiones > Apps Script dentro de tu Google Sheet.
-//
-// La hoja debe tener estas columnas en la fila 1:
+// PEGAR EN GOOGLE SHEETS: Extensiones > Apps Script
+// Estructura de columnas:
 // A ID
 // B Invitado 1
 // C Invitado 2
-// D Asiste 1
-// E Asiste 2
-// F Total
-// G Canción
-// H Fecha
-// I Estado
+// D Invitado 3
+// E Invitado 4
+// F Asiste 1
+// G Asiste 2
+// H Asiste 3
+// I Asiste 4
+// J Total
+// K Canción
+// L Restricciones
+// M Fecha
+// N Estado
 
 const SHEET_NAME = "Hoja 1";
+const EMAIL_DESTINO = "feryflorcasamiento@gmail.com";
 
-function doGet(e) {
-  const action = e.parameter.action || "";
+function doGet(e){
   const callback = e.parameter.callback || "callback";
-
-  if (action === "getGuest") {
-    const result = getGuestById_(e.parameter.id);
-    return ContentService
-      .createTextOutput(`${callback}(${JSON.stringify(result)})`)
-      .setMimeType(ContentService.MimeType.JAVASCRIPT);
-  }
+  const result = e.parameter.action === "getGuest"
+    ? getGuest_(e.parameter.id)
+    : {ok:false,error:"Acción inválida"};
 
   return ContentService
-    .createTextOutput(JSON.stringify({ ok: false, error: "Acción inválida" }))
+    .createTextOutput(`${callback}(${JSON.stringify(result)})`)
+    .setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
+
+function doPost(e){
+  const result = e.parameter.action === "rsvp"
+    ? saveRsvp_(e.parameter)
+    : {ok:false,error:"Acción inválida"};
+
+  return ContentService
+    .createTextOutput(JSON.stringify(result))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function doPost(e) {
-  const action = e.parameter.action || "";
-
-  if (action === "rsvp") {
-    const result = saveRsvp_(
-      e.parameter.id,
-      e.parameter.attendance,
-      e.parameter.song || ""
-    );
-
-    return ContentService
-      .createTextOutput(JSON.stringify(result))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ ok: false, error: "Acción inválida" }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function getSheet_() {
+function sheet_(){
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-  if (!sheet) throw new Error(`No existe la hoja "${SHEET_NAME}"`);
+  if(!sheet) throw new Error(`No existe la hoja "${SHEET_NAME}"`);
   return sheet;
 }
 
-function normalizeId_(value) {
-  return String(value || "").trim().padStart(3, "0");
+function id_(value){
+  return String(value || "").trim().padStart(3,"0");
 }
 
-function getGuestById_(id) {
-  const sheet = getSheet_();
-  const values = sheet.getDataRange().getDisplayValues();
-  const targetId = normalizeId_(id);
-
-  for (let i = 1; i < values.length; i++) {
-    const rowId = normalizeId_(values[i][0]);
-    if (rowId === targetId) {
-      return {
-        ok: true,
-        id: rowId,
-        guest1: values[i][1] || "",
-        guest2: values[i][2] || ""
-      };
+function getGuest_(id){
+  const values = sheet_().getDataRange().getDisplayValues();
+  const target = id_(id);
+  for(let i=1;i<values.length;i++){
+    if(id_(values[i][0]) === target){
+      return {ok:true,id:target,guests:values[i].slice(1,5)};
     }
   }
-
-  return { ok: false, error: "Invitación no encontrada" };
+  return {ok:false,error:"Invitación no encontrada"};
 }
 
-function saveRsvp_(id, attendance, song) {
-  const sheet = getSheet_();
+function saveRsvp_(p){
+  const sheet = sheet_();
   const values = sheet.getDataRange().getDisplayValues();
-  const targetId = normalizeId_(id);
+  const target = id_(p.id);
+  const attendance = JSON.parse(p.attendance || "[]");
 
-  for (let i = 1; i < values.length; i++) {
-    const rowId = normalizeId_(values[i][0]);
+  for(let i=1;i<values.length;i++){
+    if(id_(values[i][0]) !== target) continue;
 
-    if (rowId === targetId) {
-      const guest1 = values[i][1] || "";
-      const guest2 = values[i][2] || "";
+    const guests = values[i].slice(1,5);
+    const normalized = [0,1,2,3].map(x => guests[x] ? (attendance[x] || "No") : "");
+    const total = normalized.filter(x => x === "Sí").length;
+    const status = total ? "Confirmado" : "No asisten";
+    const row = i + 1;
 
-      let attends1 = "No";
-      let attends2 = guest2 ? "No" : "";
-      let total = 0;
-      let status = "No asisten";
+    sheet.getRange(row,6,1,9).setValues([[
+      normalized[0], normalized[1], normalized[2], normalized[3],
+      total, p.song || "", p.food || "", new Date(), status
+    ]]);
 
-      if (attendance === "both" && guest2) {
-        attends1 = "Sí";
-        attends2 = "Sí";
-        total = 2;
-        status = "Confirmado";
-      } else if (attendance === "guest1") {
-        attends1 = "Sí";
-        attends2 = guest2 ? "No" : "";
-        total = 1;
-        status = "Confirmado";
-      } else if (attendance === "guest2" && guest2) {
-        attends1 = "No";
-        attends2 = "Sí";
-        total = 1;
-        status = "Confirmado";
-      }
+    const namesYes = guests.filter((g,x)=>g && normalized[x]==="Sí");
+    const namesNo = guests.filter((g,x)=>g && normalized[x]==="No");
 
-      const rowNumber = i + 1;
-      sheet.getRange(rowNumber, 4, 1, 6).setValues([[
-        attends1,
-        attends2,
-        total,
-        song,
-        new Date(),
-        status
-      ]]);
+    MailApp.sendEmail({
+      to: EMAIL_DESTINO,
+      subject: `Confirmación boda · Invitación ${target}`,
+      htmlBody: `
+        <h2>Nueva confirmación</h2>
+        <p><strong>Asisten:</strong> ${namesYes.join(", ") || "Nadie"}</p>
+        <p><strong>No asisten:</strong> ${namesNo.join(", ") || "-"}</p>
+        <p><strong>Canción:</strong> ${p.song || "-"}</p>
+        <p><strong>Restricciones:</strong> ${p.food || "-"}</p>`
+    });
 
-      return { ok: true };
-    }
+    return {ok:true};
   }
-
-  return { ok: false, error: "Invitación no encontrada" };
+  return {ok:false,error:"Invitación no encontrada"};
 }

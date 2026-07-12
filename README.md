@@ -1,24 +1,28 @@
 # Invitación Fernando & Florencia
 
-Archivos del proyecto:
+## Subir a GitHub
+Subí todo el contenido de esta carpeta, incluida la carpeta `assets`, al repositorio conectado con Vercel.
 
-- `index.html`: estructura de la invitación.
-- `styles.css`: diseño blanco, negro y plateado.
-- `script.js`: cuenta regresiva, invitados personalizados y formulario.
-- `apps-script.gs`: código que conecta la página con Google Sheets.
+## Conectar Google Sheets
+1. En la planilla, verificá que la pestaña se llame `Hoja 1` o cambiá `SHEET_NAME` en `apps-script.gs`.
+2. Usá estas columnas:
+   `ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado`
+3. Abrí `Extensiones > Apps Script`.
+4. Pegá el contenido de `apps-script.gs`.
+5. Elegí `Implementar > Nueva implementación > Aplicación web`.
+6. Ejecutar como: vos.
+7. Quién tiene acceso: cualquier persona.
+8. Copiá la URL que termina en `/exec`.
+9. Abrí `script.js` y reemplazá `PEGAR_URL_DE_APPS_SCRIPT_AQUI`.
 
 ## Enlaces personalizados
-
-Cada invitación se abre con un ID:
-
+Ejemplo:
 `https://TU-SITIO.vercel.app/?id=001`
 
-## Datos que todavía faltan completar
+## WhatsApp
+Al confirmar:
+- se actualiza Google Sheets;
+- se envía un correo al Gmail del casamiento;
+- se abre WhatsApp de Flor con el mensaje preparado.
 
-En `script.js`:
-
-- `API_URL`
-- `CBU`
-- `INSTAGRAM_URL`
-
-También conviene reemplazar los enlaces de Google Maps por los enlaces exactos de la iglesia y del salón.
+También hay botones separados para consultar a Flor o Fernando.
