@@ -162,3 +162,30 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: .12 });
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+const weddingMusic=document.getElementById("weddingMusic");
+const musicToggle=document.getElementById("musicToggle");
+
+async function startWeddingMusic(){
+  try{
+    weddingMusic.volume=.55;
+    await weddingMusic.play();
+    musicToggle.hidden=false;
+    musicToggle.textContent="🔊";
+  }catch(e){
+    musicToggle.hidden=false;
+    musicToggle.textContent="▶";
+  }
+}
+
+document.getElementById("openInvitation").addEventListener("click",startWeddingMusic);
+
+musicToggle.addEventListener("click",async()=>{
+  if(weddingMusic.paused){
+    await weddingMusic.play();
+    musicToggle.textContent="🔊";
+  }else{
+    weddingMusic.pause();
+    musicToggle.textContent="🔇";
+  }
+});
