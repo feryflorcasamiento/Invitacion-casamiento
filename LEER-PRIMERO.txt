@@ -1,0 +1,14 @@
+CORRECCIÓN IMPORTANTE
+
+1. Este paquete no usa una carpeta assets.
+   Subí TODOS los archivos juntos al nivel principal del repositorio.
+
+2. Las fotos se verán apenas GitHub/Vercel publique estos archivos.
+
+3. Los nombres de invitados aparecen únicamente después de:
+   - conectar Google Sheets con Apps Script;
+   - pegar la URL /exec en script.js;
+   - abrir un enlace con el ID, por ejemplo:
+     https://TU-SITIO.vercel.app/?id=001
+
+Mientras Google Sheets no esté conectado, la web queda en modo de prueba.
