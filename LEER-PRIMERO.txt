@@ -1,14 +1,20 @@
-CORRECCIÓN IMPORTANTE
+VERSIÓN DEFINITIVA ÚNICA
 
-1. Este paquete no usa una carpeta assets.
-   Subí TODOS los archivos juntos al nivel principal del repositorio.
+Subí TODOS estos archivos juntos al nivel principal del repositorio.
+Esta versión usa un solo index.html con el diseño y la programación incorporados,
+por lo que no depende de styles.css ni script.js anteriores.
 
-2. Las fotos se verán apenas GitHub/Vercel publique estos archivos.
+Para evitar conflictos:
+1. Podés borrar styles.css y script.js del repositorio, o simplemente dejarlos: esta versión no los usa.
+2. Subí index.html y todos los archivos de imagen/audio.
+3. Hacé Commit changes.
+4. Esperá que Vercel muestre el nuevo deployment como Ready.
+5. Abrí la URL agregando ?v=final al final una sola vez para evitar caché del navegador.
 
-3. Los nombres de invitados aparecen únicamente después de:
-   - conectar Google Sheets con Apps Script;
-   - pegar la URL /exec en script.js;
-   - abrir un enlace con el ID, por ejemplo:
-     https://TU-SITIO.vercel.app/?id=001
+Para invitados personalizados:
+- Publicá apps-script.gs como Aplicación web.
+- Pegá la URL /exec dentro de index.html, reemplazando PEGAR_URL_DE_APPS_SCRIPT_AQUI.
+- Abrí enlaces como: https://TU-SITIO.vercel.app/?id=001
 
-Mientras Google Sheets no esté conectado, la web queda en modo de prueba.
+Columnas de Google Sheets:
+ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado

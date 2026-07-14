@@ -1,186 +1,348 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f1e8">
-  <title>Fernando & Florencia · 16.10.2026</title>
-  <meta name="description" content="Invitación al casamiento de Fernando y Florencia.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f1e8">
+<title>Fernando & Florencia · 16.10.2026</title>
+<meta name="description" content="Invitación al casamiento de Fernando y Florencia">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#f6f1e8;--paper:#fffdf8;--ink:#2c2b29;--graphite:#353535;
+  --silver:#a8aaae;--line:#d8d2c8;--soft:#6e6a64;--shadow:0 24px 70px rgba(56,50,44,.13)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:Montserrat,sans-serif;line-height:1.7}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:600;line-height:1.05;margin:0 0 18px}
+h1{font-size:clamp(3.5rem,12vw,7rem)}
+h2{font-size:clamp(2.5rem,8vw,4.8rem)}
+h3{font-size:1.7rem}
+p{margin:0 0 20px}
+.eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.72rem;color:#7b7d81;font-weight:600}
+.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:13px 25px;border-radius:999px;font:600 .85rem Montserrat,sans-serif;letter-spacing:.04em;text-decoration:none;cursor:pointer;transition:.2s ease}
+.button:hover{transform:translateY(-2px)}
+.primary{background:var(--graphite);border:1px solid var(--graphite);color:#fff}
+.outline{background:transparent;border:1px solid var(--silver);color:var(--graphite)}
+.section{width:min(92vw,1000px);margin:auto;padding:96px 0;text-align:center}
+.opening{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 20%,#fff 0,var(--ivory) 60%,#e7dfd4 100%)}
+.opening-card{position:relative;width:min(92vw,650px);padding:62px 32px;text-align:center;background:rgba(255,253,248,.9);border:1px solid rgba(168,170,174,.5);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}
+.opening-card:before,.opening-card:after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--silver),transparent)}
+.opening-card:before{top:34px}.opening-card:after{bottom:34px}
+.opening-copy{max-width:470px;margin:0 auto 28px;color:var(--soft)}
+.monogram{position:relative;width:160px;height:112px;margin:0 auto 18px;font-family:"Cormorant Garamond",serif}
+.monogram:before{content:"";position:absolute;inset:8px 20px 12px;border:1px solid rgba(120,122,128,.55);border-radius:50%}
+.monogram:after{content:"✦";position:absolute;top:-2px;left:50%;transform:translateX(-50%);color:var(--silver);font-size:.8rem}
+.monogram .left,.monogram .right{position:absolute;top:16px;font-size:5rem;color:#626368;line-height:1}
+.monogram .left{left:31px}.monogram .right{right:31px}
+.monogram i{position:absolute;inset:0;display:grid;place-items:center;font-size:1.5rem;color:var(--silver);z-index:2}
+.music-link{display:block;margin-top:18px;color:var(--soft);font-size:.82rem}
+.hero{height:100vh;position:relative;overflow:hidden;background:#ddd7ce}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 43%}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.72))}
+.hero-copy{position:absolute;left:8vw;right:8vw;bottom:8vw;color:white;z-index:2;text-shadow:0 4px 24px rgba(0,0,0,.6)}
+.hero-copy p{font-size:clamp(1rem,2.5vw,1.35rem)}
+.guest-card{margin:40px auto 0;padding:30px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:740px}
+.guest-card span{font-size:.73rem;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.guest-card h3{margin:8px 0 0}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.countdown div{padding:25px 8px;border-top:1px solid var(--silver);border-bottom:1px solid var(--silver)}
+.countdown strong{display:block;font-family:"Cormorant Garamond",serif;font-size:clamp(2.5rem,8vw,4.8rem);font-weight:600}
+.countdown span{text-transform:uppercase;letter-spacing:.17em;font-size:.63rem}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:52px 0}
+.timeline article{padding:35px 22px;border-left:1px solid var(--silver)}
+.year{display:block;font-family:"Cormorant Garamond",serif;font-size:3.2rem;color:#74767b}
+.editorial-gallery{display:grid;grid-template-columns:.8fr 1.2fr;grid-template-areas:"memory tall" "wide wide";gap:26px;margin-top:48px;align-items:start}
+.memory-card{grid-area:memory;margin:0;padding:16px 16px 22px;background:#fffdf8;border:1px solid rgba(168,170,174,.38);box-shadow:var(--shadow);transform:rotate(-1.2deg)}
+.photo-mat{background:#ede7df;padding:8px}
+.memory-card img{width:100%;display:block;height:auto}
+.memory-card figcaption{padding-top:16px;font-family:"Cormorant Garamond",serif;font-size:1.35rem;color:var(--soft)}
+.memory-card figcaption span{display:block;font:600 .7rem Montserrat,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--silver);margin-bottom:4px}
+.editorial-photo{margin:0;overflow:hidden;border-radius:28px;box-shadow:var(--shadow)}
+.editorial-photo img{width:100%;display:block;object-fit:cover}
+.tall-photo{grid-area:tall}.tall-photo img{height:520px;object-position:center}
+.wide-photo{grid-area:wide}.wide-photo img{height:480px;object-position:center 42%}
+.location-card .image-frame{position:relative;margin:32px auto;overflow:hidden;border-radius:28px;background:#fff;padding:12px;box-shadow:var(--shadow)}
+.location-card .image-frame:after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.75);border-radius:18px;pointer-events:none}
+.location-card img{display:block;width:100%;max-height:650px;object-fit:cover;border-radius:18px}
+.time{font-size:1.05rem;letter-spacing:.08em}
+.info-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:24px}
+.paper-card{background:rgba(255,253,248,.9);border:1px solid rgba(168,170,174,.42);border-radius:28px;box-shadow:var(--shadow);padding:48px 34px}
+.adults p:last-child{text-align:left}
+.alias-box{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin-top:32px}
+.alias-box strong{font-size:clamp(1.55rem,5vw,2.3rem);letter-spacing:.12em}
+.instagram{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.deadline{max-width:780px;margin:32px auto 46px;padding:32px;border:1px solid var(--silver);border-radius:24px;background:#fffaf1}
+.deadline strong{font-family:"Cormorant Garamond",serif;font-size:1.9rem}
+form{max-width:780px;margin:auto;text-align:left}
+form>label{display:block;margin:28px 0 9px;font-weight:600}
+input,textarea{width:100%;padding:15px 16px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font:inherit;color:var(--ink)}
+.submit{display:flex;margin:28px auto 0}
+.guest-choices{display:grid;gap:14px}
+.guest-choice{padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+.guest-choice h3{font-size:1.45rem;margin-bottom:12px}
+.guest-choice label{margin-right:22px;white-space:nowrap}
+.guest-choice input{width:auto;margin-right:7px}
+.form-message{min-height:28px;margin-top:18px;text-align:center}
+.success{color:#376948}.error{color:#a33f3f}
+.whatsapp-choice{max-width:780px;margin:30px auto 0;padding:25px;border-top:1px solid var(--line)}
+.whatsapp-choice>div{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.closing{display:grid;grid-template-columns:1fr 1fr;min-height:760px;background:#252525;color:#fff}
+.closing img{width:100%;height:100%;object-fit:cover}
+.closing-copy{display:flex;flex-direction:column;justify-content:center;padding:9vw}
+.closing .eyebrow{color:#c2c3c6}.closing .monogram{transform:scale(.78);color:#d9dade}
+.last-line{margin-top:30px;font-family:"Cormorant Garamond",serif;font-size:1.45rem}
+footer{text-align:center;padding:46px 20px;background:#1d1d1d;color:#fff}
+.contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.contact-links a{color:#fff;text-underline-offset:5px}
+.music-toggle{position:fixed;right:18px;bottom:18px;z-index:999;min-width:160px;height:52px;padding:0 18px;border-radius:999px;border:1px solid var(--silver);background:rgba(52,52,52,.94);color:white;display:inline-flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 10px 30px rgba(0,0,0,.25);cursor:pointer}
+.music-label{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:760px){
+  .section{padding:72px 0}
+  .countdown{grid-template-columns:repeat(2,1fr)}
+  .timeline,.info-grid,.closing{grid-template-columns:1fr}
+  .timeline article{border-left:0;border-top:1px solid var(--silver)}
+  .editorial-gallery{grid-template-columns:1fr;grid-template-areas:"memory" "tall" "wide"}
+  .memory-card{width:86%;margin:0 auto}
+  .tall-photo img,.wide-photo img{height:auto;max-height:560px;object-fit:contain;background:#eee9e1}
+  .closing img{height:520px}
+  .closing-copy{padding:76px 28px}
+  .adults p:last-child{text-align:center}
+  .music-toggle{min-width:52px;width:52px;padding:0}
+  .music-label{display:none}
+}
+</style>
 </head>
 <body>
-  <div class="opening" id="opening">
-    <div class="opening-inner">
-      <div class="monogram" aria-label="Fernando y Florencia">
-        <span>F</span><i>&</i><span>F</span>
-      </div>
-      <p class="eyebrow">16 · 10 · 2026</p>
-      <h1>Fernando &<br>Florencia</h1>
-      <p class="opening-copy">Después de 13 años de amor, llegó el momento de decir “sí” para siempre.</p>
-      <button class="button primary" id="openInvitation" type="button">Abrir invitación</button>
-      <a class="music-link" href="https://open.spotify.com/search/Perfect%20Ed%20Sheeran" target="_blank" rel="noopener">♫ Escuchar “Perfect”</a>
-    </div>
+
+<div class="opening" id="opening">
+  <div class="opening-card">
+    <div class="monogram" aria-label="Fernando y Florencia"><span class="left">F</span><i>&</i><span class="right">F</span></div>
+    <p class="eyebrow">16 · 10 · 2026</p>
+    <h1>Fernando &<br>Florencia</h1>
+    <p class="opening-copy">Después de 13 años de amor, llegó el momento de decir “sí” para siempre.</p>
+    <button class="button primary" id="openInvitation" type="button">Abrir invitación</button>
   </div>
+</div>
 
-  <main id="mainContent" hidden>
-    <section class="hero">
-      <img src="foto-2013.jpg" alt="Primera foto de Fernando y Florencia">
-      <div class="hero-shade"></div>
-      <div class="hero-copy">
-        <p>Hay historias que comienzan con un encuentro.</p>
-        <h2>La nuestra comenzó en 2013.</h2>
-      </div>
-    </section>
+<main id="mainContent" hidden>
+  <section class="hero">
+    <img src="foto-gazebo.jpeg" alt="Fernando y Florencia bajo el gazebo">
+    <div class="hero-copy">
+      <p>Hay historias que comienzan con un encuentro.</p>
+      <h2>La nuestra comenzó en 2013.</h2>
+    </div>
+  </section>
 
-    <section class="section intro reveal">
-      <p class="eyebrow">Nos casamos</p>
-      <h2>Y queremos celebrarlo con vos</h2>
+  <section class="section reveal">
+    <p class="eyebrow">Nos casamos</p>
+    <h2>Y queremos celebrarlo con vos</h2>
+    <div class="guest-card">
+      <span>Esta invitación es para</span>
+      <h3 id="guestTitle">Invitación de prueba</h3>
+    </div>
+    <div class="countdown">
+      <div><strong id="days">0</strong><span>Días</span></div>
+      <div><strong id="hours">0</strong><span>Horas</span></div>
+      <div><strong id="minutes">0</strong><span>Minutos</span></div>
+      <div><strong id="seconds">0</strong><span>Segundos</span></div>
+    </div>
+  </section>
 
-      <div class="guest-card">
-        <span>Esta invitación es para</span>
-        <h3 id="guestTitle">Invitación de prueba</h3>
-      </div>
+  <section class="section reveal">
+    <p class="eyebrow">Nuestra historia</p>
+    <h2>Un amor que creció con el tiempo</h2>
+    <div class="timeline">
+      <article><span class="year">2013</span><h3>El comienzo</h3><p>Comenzó nuestra historia.</p></article>
+      <article><span class="year">2021</span><h3>El compromiso</h3><p>Elegimos un para siempre.</p></article>
+      <article><span class="year">2026</span><h3>El gran día</h3><p>Llegó el momento de decir “sí”.</p></article>
+    </div>
+    <div class="editorial-gallery">
+      <figure class="memory-card">
+        <div class="photo-mat"><img src="foto-2013.jpg" alt="Primera foto de Fernando y Florencia"></div>
+        <figcaption><span>2013</span>Todo comenzó acá.</figcaption>
+      </figure>
+      <figure class="editorial-photo tall-photo"><img src="foto-abrazo.jpeg" alt="Fernando y Florencia abrazados"></figure>
+      <figure class="editorial-photo wide-photo"><img src="foto-gazebo.jpeg" alt="Fernando y Florencia bajo el gazebo"></figure>
+    </div>
+  </section>
 
-      <div class="countdown" aria-label="Cuenta regresiva">
-        <div><strong id="days">0</strong><span>Días</span></div>
-        <div><strong id="hours">0</strong><span>Horas</span></div>
-        <div><strong id="minutes">0</strong><span>Minutos</span></div>
-        <div><strong id="seconds">0</strong><span>Segundos</span></div>
-      </div>
-    </section>
+  <section class="section location-card reveal">
+    <p class="eyebrow">Ceremonia</p>
+    <h2>Parroquia San Francisco Solano</h2>
+    <div class="image-frame"><img src="parroquia-acuarela.png" alt="Ilustración de la Parroquia San Francisco Solano"></div>
+    <p class="time">20:00 hs · Bella Vista</p>
+    <a class="button outline" href="https://www.google.com/maps/place/Parroquia+San+Francisco+Solano/@-34.5664646,-58.6962505,16z/data=!4m15!1m8!3m7!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!2sParroquia+San+Francisco+Solano!8m2!3d-34.566486!4d-58.6962208!10e5!16s%2Fg%2F1tdc6dxr!3m5!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!8m2!3d-34.566486!4d-58.6962208!16s%2Fg%2F" target="_blank" rel="noopener">Cómo llegar</a>
+  </section>
 
-    <section class="section story reveal">
-      <p class="eyebrow">Nuestra historia</p>
-      <h2>Un amor que creció con el tiempo</h2>
+  <section class="section location-card reveal">
+    <p class="eyebrow">Recepción y fiesta</p>
+    <h2>Eventos El Argentino</h2>
+    <div class="image-frame"><img src="salon-acuarela.png" alt="Ilustración de Eventos El Argentino"></div>
+    <p class="time">21:00 hs</p>
+    <a class="button outline" href="https://www.google.com/maps/place/Eventos+El+Argentino+-+Sal%C3%B3n+De+Eventos/@-34.5578472,-58.6793506,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcbc465bc14427:0x7ce236abf75d2f3b!8m2!3d-34.5578472!4d-58.6767703!16s%2Fg%2F11bbrn5mhs?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Cómo llegar</a>
+  </section>
 
-      <div class="timeline">
-        <article>
-          <span class="year">2013</span>
-          <h3>El comienzo</h3>
-          <p>Comenzó nuestra historia.</p>
-        </article>
-        <article>
-          <span class="year">2021</span>
-          <h3>El compromiso</h3>
-          <p>Elegimos un para siempre.</p>
-        </article>
-        <article>
-          <span class="year">2026</span>
-          <h3>El gran día</h3>
-          <p>Llegó el momento de decir “sí”.</p>
-        </article>
-      </div>
+  <section class="section info-grid reveal">
+    <article class="paper-card">
+      <p class="eyebrow">Dress code</p>
+      <h2>Elegante</h2>
+      <p>El blanco y los tonos muy claros quedan reservados para la novia.</p>
+    </article>
+    <article class="paper-card adults">
+      <p class="eyebrow">Una pequeña aclaración</p>
+      <h2>Evento exclusivo para adultos</h2>
+      <p>Queremos que esta noche sea inolvidable y que puedan disfrutarla de principio a fin. Como será una fiesta larga, sabemos que puede resultar agotadora para los más chiquitos. Por este motivo, hemos decidido que la celebración sea exclusiva para adultos. ¡Esperamos que puedan relajarse y quedarse con nosotros hasta el final!</p>
+    </article>
+  </section>
 
-      <img class="story-image" src="foto-abrazo.jpeg" alt="Fernando y Florencia abrazados">
-    </section>
+  <section class="section gift reveal">
+    <p class="eyebrow">Nuestra luna de miel</p>
+    <h2>Tu presencia es nuestro mejor regalo</h2>
+    <p>Si además querés acompañarnos en el comienzo de esta nueva aventura, podés hacerlo mediante el siguiente alias.</p>
+    <div class="alias-box"><strong>FERYFLOR.BODA</strong><button class="button outline" id="copyAlias" type="button">Copiar alias</button></div>
+  </section>
 
-    <section class="section location-card reveal">
-      <p class="eyebrow">Ceremonia</p>
-      <h2>Parroquia San Francisco Solano</h2>
-      <div class="image-frame">
-        <img src="parroquia-acuarela.png" alt="Ilustración de la Parroquia San Francisco Solano">
-      </div>
-      <p class="time">20:00 hs · Bella Vista</p>
-      <a class="button outline" href="https://www.google.com/maps/place/Parroquia+San+Francisco+Solano/@-34.5664646,-58.6962505,16z/data=!4m15!1m8!3m7!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!2sParroquia+San+Francisco+Solano!8m2!3d-34.566486!4d-58.6962208!10e5!16s%2Fg%2F1tdc6dxr!3m5!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!8m2!3d-34.566486!4d-58.6962208!16s%2Fg%2F" target="_blank" rel="noopener">Cómo llegar</a>
-    </section>
+  <section class="section instagram reveal">
+    <p class="eyebrow">Compartamos los recuerdos</p>
+    <h2>@feryflor.boda</h2>
+    <p>Seguí los preparativos y compartí con nosotros los mejores momentos.</p>
+    <a class="button outline" href="https://www.instagram.com/feryflor.boda/" target="_blank" rel="noopener">Abrir Instagram</a>
+  </section>
 
-    <section class="section location-card reveal">
-      <p class="eyebrow">Recepción y fiesta</p>
-      <h2>Eventos El Argentino</h2>
-      <div class="image-frame">
-        <img src="salon-acuarela.png" alt="Ilustración de Eventos El Argentino">
-      </div>
-      <p class="time">21:00 hs</p>
-      <a class="button outline" href="https://www.google.com/maps/place/Eventos+El+Argentino+-+Sal%C3%B3n+De+Eventos/@-34.5578472,-58.6793506,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcbc465bc14427:0x7ce236abf75d2f3b!8m2!3d-34.5578472!4d-58.6767703!16s%2Fg%2F11bbrn5mhs?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Cómo llegar</a>
-    </section>
+  <section class="section reveal" id="confirmar">
+    <p class="eyebrow">Confirmación de asistencia</p>
+    <h2>¿Nos acompañás?</h2>
+    <div class="deadline">
+      <strong>Fecha límite: 15 de agosto de 2026</strong>
+      <p>La confirmación es obligatoria. Por cuestiones de organización, les pedimos que confirmen su asistencia antes del 15 de agosto de 2026. Luego de esa fecha cerraremos la lista definitiva de invitados y no podremos aceptar nuevas confirmaciones.</p>
+    </div>
+    <form id="rsvpForm">
+      <div id="guestChoices" class="guest-choices"></div>
+      <label for="song">¿Qué canción no puede faltar en la fiesta?</label>
+      <input id="song" type="text" maxlength="120" placeholder="Canción y artista">
+      <label for="food">¿Tenés alguna restricción alimentaria?</label>
+      <textarea id="food" rows="3" maxlength="300" placeholder="Opcional"></textarea>
+      <button class="button primary submit" id="submitRsvp" type="submit">Enviar confirmación</button>
+      <p id="formMessage" class="form-message" role="status"></p>
+    </form>
+    <div id="whatsappChoice" class="whatsapp-choice" hidden>
+      <p>La respuesta ya quedó guardada. Elegí a quién enviarle también el mensaje por WhatsApp:</p>
+      <div><a id="sendFlor" class="button outline" target="_blank">Enviar a Florencia</a><a id="sendFer" class="button outline" target="_blank">Enviar a Fernando</a></div>
+    </div>
+  </section>
 
-    <section class="section info-grid reveal">
-      <article class="paper-card">
-        <p class="eyebrow">Dress code</p>
-        <h2>Elegante</h2>
-        <p>El blanco y los tonos muy claros quedan reservados para la novia.</p>
-      </article>
+  <section class="closing">
+    <img src="foto-risas.jpeg" alt="Fernando y Florencia riendo juntos">
+    <div class="closing-copy">
+      <p class="eyebrow">Gracias</p>
+      <h2>Nos llena de alegría compartir este día con ustedes.</h2>
+      <p>Los esperamos el 16 de octubre de 2026.</p>
+      <div class="monogram"><span class="left">F</span><i>&</i><span class="right">F</span></div>
+      <p class="last-line">Lo mejor de nuestra historia todavía está por escribirse…</p>
+    </div>
+  </section>
 
-      <article class="paper-card adults">
-        <p class="eyebrow">Una pequeña aclaración</p>
-        <h2>Evento exclusivo para adultos</h2>
-        <p>Queremos que esta noche sea inolvidable y que puedan disfrutarla de principio a fin. Como será una fiesta larga, sabemos que puede resultar agotadora para los más chiquitos. Por este motivo, hemos decidido que la celebración sea exclusiva para adultos. ¡Esperamos que puedan relajarse y quedarse con nosotros hasta el final!</p>
-      </article>
-    </section>
+  <footer>
+    <p>¿Tenés alguna consulta?</p>
+    <div class="contact-links">
+      <a href="https://wa.me/5491132937869?text=Hola%20Flor%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." target="_blank">Hablar con Florencia</a>
+      <a href="https://wa.me/5491134173998?text=Hola%20Fer%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." target="_blank">Hablar con Fernando</a>
+    </div>
+  </footer>
+</main>
 
-    <section class="section gift reveal">
-      <p class="eyebrow">Nuestra luna de miel</p>
-      <h2>Tu presencia es nuestro mejor regalo</h2>
-      <p>Si además querés acompañarnos en el comienzo de esta nueva aventura, podés hacerlo mediante el siguiente alias.</p>
-      <div class="alias-box">
-        <strong id="alias">FERYFLOR.BODA</strong>
-        <button class="button outline" id="copyAlias" type="button">Copiar alias</button>
-      </div>
-    </section>
+<audio id="weddingMusic" src="perfect.mp3" preload="auto" loop></audio>
+<button id="musicToggle" class="music-toggle" type="button" hidden><span>♫</span><span class="music-label">Nuestra canción</span></button>
 
-    <section class="section instagram reveal">
-      <p class="eyebrow">Compartamos los recuerdos</p>
-      <h2>@feryflor.boda</h2>
-      <p>Seguí los preparativos y compartí con nosotros los mejores momentos.</p>
-      <a class="button outline" href="https://www.instagram.com/feryflor.boda/" target="_blank" rel="noopener">Abrir Instagram</a>
-    </section>
+<script>
+const CONFIG={
+  apiUrl:"PEGAR_URL_DE_APPS_SCRIPT_AQUI",
+  weddingDate:"2026-10-16T20:00:00-03:00",
+  confirmationDeadline:"2026-08-15T23:59:59-03:00",
+  florWhatsApp:"5491132937869",
+  ferWhatsApp:"5491134173998"
+};
+const $=s=>document.querySelector(s);
+const id=new URLSearchParams(location.search).get("id")||"001";
+let guestData={id,guests:["Invitado 1","Invitado 2","",""]};
 
-    <section class="section rsvp reveal" id="confirmar">
-      <p class="eyebrow">Confirmación de asistencia</p>
-      <h2>¿Nos acompañás?</h2>
+$("#openInvitation").addEventListener("click",async()=>{
+  $("#opening").style.display="none";
+  $("#mainContent").hidden=false;
+  window.scrollTo(0,0);
+  try{
+    $("#weddingMusic").volume=.55;
+    await $("#weddingMusic").play();
+    $("#musicToggle").hidden=false;
+  }catch{
+    $("#musicToggle").hidden=false;
+  }
+});
 
-      <div class="deadline">
-        <strong>Fecha límite: 15 de agosto de 2026</strong>
-        <p>La confirmación es obligatoria. Por cuestiones de organización, les pedimos que confirmen su asistencia antes del 15 de agosto de 2026. Luego de esa fecha cerraremos la lista definitiva de invitados y no podremos aceptar nuevas confirmaciones.</p>
-      </div>
+$("#musicToggle").addEventListener("click",async()=>{
+  const audio=$("#weddingMusic");
+  if(audio.paused){await audio.play();$("#musicToggle").innerHTML='<span>♫</span><span class="music-label">Nuestra canción</span>'}
+  else{audio.pause();$("#musicToggle").innerHTML='<span>▶</span><span class="music-label">Reproducir</span>'}
+});
 
-      <form id="rsvpForm">
-        <div id="guestChoices" class="guest-choices"></div>
+function tick(){
+  const d=Math.max(new Date(CONFIG.weddingDate)-new Date(),0);
+  $("#days").textContent=Math.floor(d/86400000);
+  $("#hours").textContent=Math.floor((d%86400000)/3600000);
+  $("#minutes").textContent=Math.floor((d%3600000)/60000);
+  $("#seconds").textContent=Math.floor((d%60000)/1000);
+}
+tick();setInterval(tick,1000);
 
-        <label for="song">¿Qué canción no puede faltar en la fiesta?</label>
-        <input id="song" name="song" type="text" maxlength="120" placeholder="Canción y artista">
+$("#copyAlias").addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText("FERYFLOR.BODA");$("#copyAlias").textContent="Alias copiado";setTimeout(()=>$("#copyAlias").textContent="Copiar alias",1800)}
+  catch{alert("Alias: FERYFLOR.BODA")}
+});
 
-        <label for="food">¿Tenés alguna restricción alimentaria?</label>
-        <textarea id="food" name="food" rows="3" maxlength="300" placeholder="Opcional"></textarea>
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function showGuests(data){
+  guestData=data;
+  const names=data.guests.filter(Boolean);
+  $("#guestTitle").textContent=names.length?names.join(" · "):"Invitación";
+  $("#guestChoices").innerHTML=names.map((n,i)=>`<div class="guest-choice"><h3>${esc(n)}</h3><label><input type="radio" name="g${i+1}" value="Sí" required> Asiste</label><label><input type="radio" name="g${i+1}" value="No" required> No asiste</label></div>`).join("");
+}
+window.receiveGuest=r=>r?.ok?showGuests(r):($("#guestTitle").textContent="Invitación no encontrada",$("#rsvpForm").style.display="none");
+if(CONFIG.apiUrl.startsWith("https://script.google.com/")){
+  const s=document.createElement("script");
+  s.src=`${CONFIG.apiUrl}?action=getGuest&id=${encodeURIComponent(id)}&callback=receiveGuest`;
+  document.body.appendChild(s);
+}else showGuests(guestData);
 
-        <button class="button primary submit" id="submitRsvp" type="submit">Enviar confirmación</button>
-        <p id="formMessage" class="form-message" role="status"></p>
-      </form>
+$("#rsvpForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const msg=$("#formMessage");
+  if(new Date()>new Date(CONFIG.confirmationDeadline)){msg.className="form-message error";msg.textContent="El plazo de confirmación finalizó el 15 de agosto de 2026.";return}
+  const active=guestData.guests.filter(Boolean);
+  const attendance=active.map((_,i)=>document.querySelector(`input[name="g${i+1}"]:checked`)?.value||"");
+  if(attendance.some(v=>!v)){msg.className="form-message error";msg.textContent="Indicá si asiste o no cada persona invitada.";return}
+  const song=$("#song").value.trim(),food=$("#food").value.trim();
+  const payload=new URLSearchParams({action:"rsvp",id:guestData.id,song,food,attendance:JSON.stringify(attendance)});
+  const btn=$("#submitRsvp");btn.disabled=true;btn.textContent="Guardando...";
+  if(CONFIG.apiUrl.startsWith("https://script.google.com/")){
+    try{await fetch(CONFIG.apiUrl,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},body:payload.toString()})}
+    catch{msg.className="form-message error";msg.textContent="No pudimos guardar la respuesta.";btn.disabled=false;btn.textContent="Enviar confirmación";return}
+  }
+  const yes=active.filter((_,i)=>attendance[i]==="Sí"),no=active.filter((_,i)=>attendance[i]==="No");
+  const text=["Hola Flor y Fer, confirmamos nuestra asistencia al casamiento.","",yes.length?"✅ Asisten: "+yes.join(", "):"✅ No asistirá ninguna persona de esta invitación.",no.length?"❌ No asisten: "+no.join(", "):"",song?"🎵 Canción: "+song:"",food?"🍽️ Restricciones: "+food:""].filter(Boolean).join("\n");
+  $("#sendFlor").href=`https://wa.me/${CONFIG.florWhatsApp}?text=${encodeURIComponent(text)}`;
+  $("#sendFer").href=`https://wa.me/${CONFIG.ferWhatsApp}?text=${encodeURIComponent(text)}`;
+  msg.className="form-message success";msg.textContent="¡Gracias! La respuesta quedó guardada.";
+  btn.textContent="Confirmación enviada";$("#whatsappChoice").hidden=false;
+});
 
-      <div id="whatsappChoice" class="whatsapp-choice" hidden>
-        <p>La respuesta ya quedó guardada. Elegí a quién enviarle también el mensaje por WhatsApp:</p>
-        <div>
-          <a id="sendFlor" class="button outline" target="_blank" rel="noopener">Enviar a Florencia</a>
-          <a id="sendFer" class="button outline" target="_blank" rel="noopener">Enviar a Fernando</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing">
-      <img src="foto-risas.jpeg" alt="Fernando y Florencia riendo juntos">
-      <div class="closing-copy">
-        <p class="eyebrow">Gracias</p>
-        <h2>Nos llena de alegría compartir este día con ustedes.</h2>
-        <p>Los esperamos el 16 de octubre de 2026.</p>
-        <div class="monogram small"><span>F</span><i>&</i><span>F</span></div>
-        <p class="last-line">Lo mejor de nuestra historia todavía está por escribirse…</p>
-      </div>
-    </section>
-
-    <footer>
-      <p>¿Tenés alguna consulta?</p>
-      <div class="contact-links">
-        <a href="https://wa.me/5491132937869?text=Hola%20Flor%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." target="_blank" rel="noopener">Hablar con Florencia</a>
-        <a href="https://wa.me/5491134173998?text=Hola%20Fer%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." target="_blank" rel="noopener">Hablar con Fernando</a>
-      </div>
-    </footer>
-  </main>
-
-  <audio id="weddingMusic" src="perfect.mp3" preload="auto" loop></audio>
-  <button id="musicToggle" class="music-toggle" type="button" aria-label="Pausar música" hidden>🔊</button>
-  <script src="script.js"></script>
+const ob=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add("visible")),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>ob.observe(el));
+</script>
 </body>
 </html>
