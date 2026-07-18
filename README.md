@@ -3,11 +3,9 @@
 ## Archivos
 Subí a GitHub:
 - `index.html`
-- `styles.css`
-- `script.js`
 - `apps-script.gs`
 - `README.md`
-- la carpeta completa `assets`
+- las fotografías, acuarelas y el archivo de música incluidos en este ZIP
 
 Vercel publicará la actualización automáticamente.
 
