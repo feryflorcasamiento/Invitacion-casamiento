@@ -1,20 +1,18 @@
-VERSIÓN DEFINITIVA ÚNICA
+VERSIÓN FINAL
 
-Subí TODOS estos archivos juntos al nivel principal del repositorio.
-Esta versión usa un solo index.html con el diseño y la programación incorporados,
-por lo que no depende de styles.css ni script.js anteriores.
+Subí todos estos archivos juntos al nivel principal del repositorio.
+Esta versión usa un único index.html con diseño, estilos y programación incluidos.
 
-Para evitar conflictos:
-1. Podés borrar styles.css y script.js del repositorio, o simplemente dejarlos: esta versión no los usa.
-2. Subí index.html y todos los archivos de imagen/audio.
-3. Hacé Commit changes.
-4. Esperá que Vercel muestre el nuevo deployment como Ready.
-5. Abrí la URL agregando ?v=final al final una sola vez para evitar caché del navegador.
-
-Para invitados personalizados:
-- Publicá apps-script.gs como Aplicación web.
-- Pegá la URL /exec dentro de index.html, reemplazando PEGAR_URL_DE_APPS_SCRIPT_AQUI.
-- Abrí enlaces como: https://TU-SITIO.vercel.app/?id=001
-
-Columnas de Google Sheets:
+Para conectar Google Sheets:
+1. La fila 1 debe tener:
 ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado
+2. En Google Sheets: Extensiones > Apps Script.
+3. Pegá apps-script.gs.
+4. Implementar > Nueva implementación > Aplicación web.
+5. Ejecutar como vos. Acceso: Cualquier persona.
+6. Copiá la URL /exec.
+7. En index.html reemplazá PEGAR_URL_DE_APPS_SCRIPT_AQUI por esa URL.
+8. Hacé Commit changes.
+
+Enlaces personalizados:
+https://TU-SITIO.vercel.app/?id=001
