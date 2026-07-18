@@ -1483,17 +1483,21 @@ footer{padding:31px 20px;}
 
 
 /* AJUSTES FINALES SOLICITADOS */
+/* AJUSTES FINALES DEFINITIVOS */
+
+/* Se conserva Montserrat para textos funcionales y Cormorant para títulos */
 body,
 button,
 input,
-textarea,
+textarea{
+  font-family:"Montserrat",sans-serif;
+}
+
 h1,
 h2,
 h3,
-.eyebrow,
 .script,
 .opening-date,
-.opening-names,
 .opening-copy,
 .countdown-label,
 .countdown strong,
@@ -1501,62 +1505,130 @@ h3,
 .year,
 .story-quote,
 .alias-card strong,
-.instagram h2,
 .deadline strong,
 .closing-copy > p,
 .last-line,
 footer p{
-  font-family:"Cormorant Garamond",serif !important;
+  font-family:"Cormorant Garamond",serif;
 }
 
-body{font-size:1.05rem;}
-.eyebrow,.button,.form-label,.guest-card span,.countdown span,.year-small,.time,.alias-label,.contact-links a,.music-label{
-  font-family:"Cormorant Garamond",serif !important;
-  letter-spacing:.14em;
+.opening-names,
+.instagram h2{
+  font-family:"Allura",cursive;
 }
 
-/* Portada clásica, sin foto */
+body{
+  font-size:1rem;
+}
+
+.eyebrow,
+.button,
+.form-label,
+.guest-card span,
+.countdown span,
+.year-small,
+.time,
+.alias-label,
+.contact-links a,
+.music-label{
+  font-family:"Montserrat",sans-serif;
+}
+
+/* Portada con la foto vertical del gazebo */
 .opening{
-  background:linear-gradient(145deg,#f7f5ef,#e8ebe3);
-  color:var(--ink);
-}
-.opening-overlay{display:none;}
-.opening-plant svg{stroke:rgba(101,112,95,.55);}
-.opening-date{color:rgba(101,112,95,.14);}
-.opening-content{text-shadow:none;}
-.opening-small{color:var(--sage-dark);}
-.opening .button{
-  border-color:var(--sage-dark);
-  background:var(--sage-dark);
+  background:#252922;
   color:white;
-  backdrop-filter:none;
 }
-.opening .button:hover{background:#596452;color:white;}
 
-/* Foto vertical del gazebo apenas se abre la invitación */
+.opening-background{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 42%;
+}
+
+.opening-overlay{
+  display:block;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18,20,17,.18) 0%,
+      rgba(18,20,17,.20) 36%,
+      rgba(18,20,17,.78) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(20,22,18,.12),
+      transparent 35%,
+      transparent 65%,
+      rgba(20,22,18,.12)
+    );
+}
+
+.opening-date{
+  color:rgba(255,255,255,.16);
+}
+
+.opening-content{
+  text-shadow:0 3px 18px rgba(0,0,0,.42);
+}
+
+.opening-small{
+  color:white;
+}
+
+.opening .button{
+  border-color:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.14);
+  color:white;
+  backdrop-filter:blur(8px);
+}
+
+.opening .button:hover{
+  background:white;
+  border-color:white;
+  color:var(--ink);
+}
+
+/* La foto ya aparece en la apertura: el primer bloque interior queda editorial */
 .hero-intro{
-  min-height:100svh;
+  min-height:auto;
+  padding:82px 5vw 72px;
   background:var(--ivory);
   color:var(--ink);
-  place-items:end center;
+  place-items:center;
 }
+
 .hero-intro img{
-  object-fit:contain;
-  object-position:center;
-  background:var(--ivory);
+  display:none;
 }
+
 .hero-intro::after{
-  background:linear-gradient(180deg,transparent 48%,rgba(247,245,239,.18) 62%,rgba(247,245,239,.96) 88%,var(--ivory));
+  display:none;
 }
+
 .hero-intro-copy{
+  width:min(90vw,850px);
+  padding:0;
   color:var(--ink);
   text-shadow:none;
-  padding:45px 20px 38px;
 }
-.hero-intro-copy .eyebrow{color:var(--sage-dark);}
-.hero-intro-copy p:not(.eyebrow){color:var(--soft);}
 
-/* Cierre con foto a un lado y texto al otro */
+.hero-intro-copy .eyebrow{
+  color:var(--sage-dark);
+}
+
+.hero-intro-copy h2{
+  font-size:clamp(2.6rem,6vw,4.6rem);
+}
+
+.hero-intro-copy p:not(.eyebrow){
+  color:var(--soft);
+}
+
+/* Cierre con foto y texto */
 .closing{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -1564,6 +1636,7 @@ body{font-size:1.05rem;}
   background:#2f332d;
   color:white;
 }
+
 .closing img{
   position:relative;
   inset:auto;
@@ -1572,7 +1645,11 @@ body{font-size:1.05rem;}
   object-fit:cover;
   object-position:center;
 }
-.closing::after{display:none;}
+
+.closing::after{
+  display:none;
+}
+
 .closing-copy{
   width:auto;
   padding:8vw;
@@ -1583,18 +1660,72 @@ body{font-size:1.05rem;}
   text-align:left;
 }
 
-@media(max-width:780px){
-  .opening-content{margin-bottom:7vh;}
-  .opening-names{font-size:clamp(3.3rem,17vw,5.7rem);line-height:.92;}
-  .opening-copy{max-width:430px;}
-  .hero-intro{min-height:92svh;}
-  .hero-intro img{height:72%;top:0;bottom:auto;}
-  .hero-intro-copy{padding:30px 22px 32px;}
-  .hero-intro-copy h2{font-size:clamp(2rem,8vw,3.1rem);}
-  .closing{grid-template-columns:1fr;min-height:auto;}
-  .closing img{height:auto;max-height:540px;}
-  .closing-copy{padding:48px 26px 52px;text-align:center;}
+/* Instagram más discreto */
+.instagram h2{
+  font-size:clamp(2.45rem,5vw,3.7rem);
 }
+
+.instagram p:not(.eyebrow){
+  max-width:500px;
+}
+
+/* Alias refinado */
+.alias-card strong{
+  letter-spacing:.05em;
+}
+
+/* No se utiliza ningún monograma */
+.monogram,
+.closing-monogram{
+  display:none !important;
+}
+
+@media(max-width:780px){
+  .opening-background{
+    object-position:center center;
+  }
+
+  .opening-content{
+    margin-bottom:5vh;
+    padding:20px;
+  }
+
+  .opening-names{
+    font-size:clamp(3.6rem,18vw,6rem);
+    line-height:.9;
+  }
+
+  .opening-date{
+    padding-top:9vh;
+    font-size:clamp(3.2rem,18vw,5.5rem);
+  }
+
+  .opening-plant{
+    opacity:.28;
+  }
+
+  .hero-intro{
+    padding:62px 6vw 56px;
+  }
+
+  .hero-intro-copy h2{
+    font-size:clamp(2.25rem,9vw,3.4rem);
+  }
+
+  .closing{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+
+  .closing img{
+    height:auto;
+    max-height:540px;
+  }
+
+  .closing-copy{
+    padding:48px 26px 52px;
+    text-align:center;
+  }
 </style>
 </head>
 
@@ -1602,7 +1733,12 @@ body{font-size:1.05rem;}
 
 <!-- APERTURA -->
 
-<div class="opening" id="opening">
+<div class="opening" id="opening"><img
+  class="opening-background"
+  src="foto-gazebo.jpeg"
+  alt="Fernando y Florencia en el gazebo"
+>
+  
 
   <div class="opening-overlay"></div>
 
@@ -2719,9 +2855,5 @@ document
   .forEach(element => observer.observe(element));
 </script>
 
-</body>
-</html>
-document.querySelectorAll(".reveal").forEach(el=>ob.observe(el));
-</script>
 </body>
 </html>
