@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="#e9e7df" name="theme-color"/>
-<title>Fernando &amp; Florencia · 16.10.2026</title>
-<meta content="Invitación al casamiento de Fernando y Florencia" name="description"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e9e7df">
+
+<title>Fernando & Florencia · 16.10.2026</title>
+<meta name="description" content="Invitación al casamiento de Fernando y Florencia">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --ivory:#f7f5ef;
@@ -1447,517 +1450,833 @@ footer p{
     font-size:.7rem;
   }
 }
-</style>
-<style id="ajustes-finales-2026">
-/* AJUSTES FINALES SOLICITADOS */
-.section{
-  padding:52px 0;
-}
-.section-heading{
-  margin-bottom:25px;
-}
-.section-heading h2{
-  font-size:clamp(2.15rem,5.5vw,3.8rem);
-  line-height:1.08;
-  text-wrap:balance;
-}
-.section-heading p:not(.eyebrow){
-  margin-top:12px;
-}
-.eyebrow{
-  margin-bottom:9px;
-  letter-spacing:.25em;
-}
-.botanical-divider{
-  margin-top:18px;
+
+/* AJUSTES FINALES: se conserva la portada, la tipografía y la funcionalidad originales */
+.section{padding:54px 0;}
+.section-heading{margin-bottom:26px;}
+.section-heading p:not(.eyebrow){margin-top:13px;}
+.invitation-section{padding-top:48px;}
+.story-section{padding-top:58px;}
+.story-intro{margin-bottom:32px;}
+.timeline{margin-bottom:34px;}
+.story-grid{gap:22px;}
+.story-quote{margin-top:40px;}
+.locations-section{padding:56px 5vw;}
+.locations-grid{margin-top:27px;}
+.info-card{min-height:300px;padding:31px;}
+.gift-section{padding:56px 5vw;}
+.gift-card{padding:40px 29px;}
+.rsvp-section{padding-top:56px;}
+.rsvp-shell{padding:33px;}
+.instagram{padding-top:38px;padding-bottom:38px;}
+.instagram h2{font-size:clamp(2.35rem,5.5vw,3.75rem);}
+.instagram p:not(.eyebrow){margin:4px auto 16px;font-size:.88rem;}
+footer{padding:31px 20px;}
+@media(max-width:780px){
+  .section{padding:44px 0;}
+  .story-copy{padding-bottom:16px;}
+  .locations-section,.gift-section{padding-top:45px;padding-bottom:45px;}
+  .rsvp-shell{padding:25px 17px;}
+  .instagram{padding-top:34px;padding-bottom:34px;}
 }
 
-/* Portada vertical: foto completa, centrada sobre fondo liso y sin recorte. */
-.opening{
-  background:#e9e7df;
-  padding:18px;
+
+
+/* AJUSTES FINALES SOLICITADOS */
+body,
+button,
+input,
+textarea,
+h1,
+h2,
+h3,
+.eyebrow,
+.script,
+.opening-date,
+.opening-names,
+.opening-copy,
+.countdown-label,
+.countdown strong,
+.story-intro,
+.year,
+.story-quote,
+.alias-card strong,
+.instagram h2,
+.deadline strong,
+.closing-copy > p,
+.last-line,
+footer p{
+  font-family:"Cormorant Garamond",serif !important;
 }
-.opening-background{
-  inset:18px;
-  width:calc(100% - 36px);
-  height:calc(100% - 36px);
+
+body{font-size:1.05rem;}
+.eyebrow,.button,.form-label,.guest-card span,.countdown span,.year-small,.time,.alias-label,.contact-links a,.music-label{
+  font-family:"Cormorant Garamond",serif !important;
+  letter-spacing:.14em;
+}
+
+/* Portada clásica, sin foto */
+.opening{
+  background:linear-gradient(145deg,#f7f5ef,#e8ebe3);
+  color:var(--ink);
+}
+.opening-overlay{display:none;}
+.opening-plant svg{stroke:rgba(101,112,95,.55);}
+.opening-date{color:rgba(101,112,95,.14);}
+.opening-content{text-shadow:none;}
+.opening-small{color:var(--sage-dark);}
+.opening .button{
+  border-color:var(--sage-dark);
+  background:var(--sage-dark);
+  color:white;
+  backdrop-filter:none;
+}
+.opening .button:hover{background:#596452;color:white;}
+
+/* Foto vertical del gazebo apenas se abre la invitación */
+.hero-intro{
+  min-height:100svh;
+  background:var(--ivory);
+  color:var(--ink);
+  place-items:end center;
+}
+.hero-intro img{
   object-fit:contain;
   object-position:center;
-  animation:none;
-  filter:none;
+  background:var(--ivory);
 }
-.opening-overlay{
-  inset:18px;
-  background:linear-gradient(180deg,transparent 42%,rgba(18,20,17,.15) 62%,rgba(18,20,17,.72));
-  pointer-events:none;
+.hero-intro::after{
+  background:linear-gradient(180deg,transparent 48%,rgba(247,245,239,.18) 62%,rgba(247,245,239,.96) 88%,var(--ivory));
 }
-.opening-date{
-  padding-bottom:0;
-  align-items:start;
-  padding-top:7vh;
-  color:rgba(255,255,255,.2);
-  font-size:clamp(3.4rem,12vw,8rem);
+.hero-intro-copy{
+  color:var(--ink);
+  text-shadow:none;
+  padding:45px 20px 38px;
 }
-.opening-content{
-  width:min(90vw,680px);
-  margin-bottom:5vh;
-  padding:18px;
-}
-.opening-names{
-  margin-bottom:5px;
-  font-size:clamp(3.4rem,10vw,7rem);
-  line-height:.9;
-}
-.opening-copy{
-  margin:9px auto 18px;
-  font-size:clamp(1.02rem,2.6vw,1.35rem);
-}
-.opening-small{
-  margin-bottom:6px;
-}
+.hero-intro-copy .eyebrow{color:var(--sage-dark);}
+.hero-intro-copy p:not(.eyebrow){color:var(--soft);}
 
-/* Menos espacios entre bloques sin alterar su estructura. */
-.invitation-section{padding-top:46px}
-.story-section{padding-top:54px}
-.story-intro{margin-bottom:30px}
-.timeline{margin-bottom:32px}
-.story-grid{gap:20px}
-.story-quote{margin-top:38px}
-.locations-section{padding:54px 5vw}
-.locations-grid{margin-top:26px}
-.info-card{min-height:290px;padding:30px}
-.gift-section{padding:54px 5vw}
-.gift-card{padding:38px 28px}
-.instagram{
-  padding-top:40px;
-  padding-bottom:40px;
+/* Cierre con foto a un lado y texto al otro */
+.closing{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:680px;
+  background:#2f332d;
+  color:white;
 }
-.instagram h2{
-  font-size:clamp(2.25rem,5.8vw,3.8rem);
-  line-height:1;
+.closing img{
+  position:relative;
+  inset:auto;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
 }
-.instagram p:not(.eyebrow){
-  margin:4px auto 16px;
-  font-size:.88rem;
+.closing::after{display:none;}
+.closing-copy{
+  width:auto;
+  padding:8vw;
+  align-self:stretch;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:left;
 }
-.rsvp-section{padding-top:54px}
-.rsvp-shell{padding:32px}
-.closing-copy{padding-top:52px;padding-bottom:52px}
-footer{padding:30px 20px}
 
 @media(max-width:780px){
-  .section{padding:43px 0}
-  .opening{padding:10px}
-  .opening-background,
-  .opening-overlay{
-    inset:10px;
-    width:calc(100% - 20px);
-    height:calc(100% - 20px);
-  }
-  .opening-date{
-    padding-top:8vh;
-    font-size:3.8rem;
-  }
-  .opening-content{
-    margin-bottom:3.5vh;
-    padding:14px;
-  }
-  .opening-names{
-    font-size:clamp(3.2rem,17vw,5.4rem);
-  }
-  .opening-copy{
-    max-width:420px;
-    font-size:1rem;
-  }
-  .story-copy{padding-bottom:15px}
-  .locations-section,
-  .gift-section{padding-top:44px;padding-bottom:44px}
-  .rsvp-shell{padding:24px 16px}
+  .opening-content{margin-bottom:7vh;}
+  .opening-names{font-size:clamp(3.3rem,17vw,5.7rem);line-height:.92;}
+  .opening-copy{max-width:430px;}
+  .hero-intro{min-height:92svh;}
+  .hero-intro img{height:72%;top:0;bottom:auto;}
+  .hero-intro-copy{padding:30px 22px 32px;}
+  .hero-intro-copy h2{font-size:clamp(2rem,8vw,3.1rem);}
+  .closing{grid-template-columns:1fr;min-height:auto;}
+  .closing img{height:auto;max-height:540px;}
+  .closing-copy{padding:48px 26px 52px;text-align:center;}
 }
-</style></head>
+</style>
+</head>
+
 <body class="no-scroll">
+
 <!-- APERTURA -->
+
 <div class="opening" id="opening">
-<img alt="Fernando y Florencia" class="opening-background" src="foto-gazebo.jpeg"/>
-<div class="opening-overlay"></div>
-<div aria-hidden="true" class="opening-plant left">
-<svg viewbox="0 0 220 330">
-<path d="M25 320 C50 230,80 150,155 40"></path>
-<path d="M64 235 C25 220,20 185,30 160 C65 180,77 205,64 235Z"></path>
-<path d="M92 185 C135 165,145 130,136 105 C102 123,86 150,92 185Z"></path>
-<path d="M122 127 C92 105,90 76,104 54 C131 74,139 98,122 127Z"></path>
-<path d="M149 75 C175 60,187 40,184 18 C158 28,143 48,149 75Z"></path>
-<circle cx="31" cy="155" r="10"></circle>
-<circle cx="138" cy="101" r="8"></circle>
-</svg>
-</div>
-<div aria-hidden="true" class="opening-plant right">
-<svg viewbox="0 0 220 330">
-<path d="M25 320 C50 230,80 150,155 40"></path>
-<path d="M64 235 C25 220,20 185,30 160 C65 180,77 205,64 235Z"></path>
-<path d="M92 185 C135 165,145 130,136 105 C102 123,86 150,92 185Z"></path>
-<path d="M122 127 C92 105,90 76,104 54 C131 74,139 98,122 127Z"></path>
-<path d="M149 75 C175 60,187 40,184 18 C158 28,143 48,149 75Z"></path>
-<circle cx="31" cy="155" r="10"></circle>
-<circle cx="138" cy="101" r="8"></circle>
-</svg>
-</div>
-<div class="opening-date">
+
+  <div class="opening-overlay"></div>
+
+  <div class="opening-plant left" aria-hidden="true">
+    <svg viewBox="0 0 220 330">
+      <path d="M25 320 C50 230,80 150,155 40"/>
+      <path d="M64 235 C25 220,20 185,30 160 C65 180,77 205,64 235Z"/>
+      <path d="M92 185 C135 165,145 130,136 105 C102 123,86 150,92 185Z"/>
+      <path d="M122 127 C92 105,90 76,104 54 C131 74,139 98,122 127Z"/>
+      <path d="M149 75 C175 60,187 40,184 18 C158 28,143 48,149 75Z"/>
+      <circle cx="31" cy="155" r="10"/>
+      <circle cx="138" cy="101" r="8"/>
+    </svg>
+  </div>
+
+  <div class="opening-plant right" aria-hidden="true">
+    <svg viewBox="0 0 220 330">
+      <path d="M25 320 C50 230,80 150,155 40"/>
+      <path d="M64 235 C25 220,20 185,30 160 C65 180,77 205,64 235Z"/>
+      <path d="M92 185 C135 165,145 130,136 105 C102 123,86 150,92 185Z"/>
+      <path d="M122 127 C92 105,90 76,104 54 C131 74,139 98,122 127Z"/>
+      <path d="M149 75 C175 60,187 40,184 18 C158 28,143 48,149 75Z"/>
+      <circle cx="31" cy="155" r="10"/>
+      <circle cx="138" cy="101" r="8"/>
+    </svg>
+  </div>
+
+  <div class="opening-date">
     16 · 10 · 2026
   </div>
-<div class="opening-content">
 
-<p class="opening-small">Nos casamos</p>
-<h1 class="opening-names">
-      Fernando &amp; Florencia
+  <div class="opening-content">
+
+    <p class="opening-small">Nos casamos</p>
+
+    <h1 class="opening-names">
+      Fernando & Florencia
     </h1>
-<p class="opening-copy">
+
+    <p class="opening-copy">
       Después de 13 años compartiendo la vida, llegó el momento de decir “sí” para siempre.
     </p>
-<button class="button" id="openInvitation" type="button">
+
+    <button
+      class="button"
+      id="openInvitation"
+      type="button"
+    >
       Abrir invitación
     </button>
+
+  </div>
 </div>
-</div>
+
 <!-- CONTENIDO -->
-<main hidden="" id="mainContent">
-<!-- HERO -->
-<section class="hero-intro">
-<img alt="Fernando y Florencia abrazados" src="foto-abrazo.jpeg"/>
-<div class="hero-intro-copy">
-<p class="eyebrow">Nuestra historia</p>
-<h2>
-        Hay historias que comienzan con un encuentro.
+
+<main id="mainContent" hidden>
+
+  <!-- HERO -->
+
+  <section class="hero-intro">
+
+    <img
+      src="foto-gazebo.jpeg"
+      alt="Fernando y Florencia en el gazebo"
+    >
+
+    <div class="hero-intro-copy">
+
+      <p class="eyebrow">Fernando & Florencia</p>
+
+      <h2>
+        Después de 13 años compartiendo la vida, llegó el momento de celebrar nuestro amor.
       </h2>
-<p>
-        La nuestra comenzó en 2013 y desde entonces seguimos eligiéndonos todos los días.
+
+      <p>
+        Gracias por acompañarnos en este día tan especial.
       </p>
-</div>
-</section>
-<!-- INVITACIÓN -->
-<section class="section invitation-section reveal">
-<div class="section-heading">
-<p class="eyebrow">16 de octubre de 2026</p>
-<h2>
+
+    </div>
+
+  </section>
+
+  <!-- INVITACIÓN -->
+
+  <section class="section invitation-section reveal">
+
+    <div class="section-heading">
+
+      <p class="eyebrow">16 de octubre de 2026</p>
+
+      <h2>
         Queremos celebrar este momento con vos
       </h2>
-<div class="botanical-divider">
-<span>❧</span>
-</div>
-</div>
-<div class="guest-card">
-<span>Esta invitación es para</span>
-<h3 id="guestTitle">
+
+      <div class="botanical-divider">
+        <span>❧</span>
+      </div>
+
+    </div>
+
+    <div class="guest-card">
+
+      <span>Esta invitación es para</span>
+
+      <h3 id="guestTitle">
         Invitación
       </h3>
-</div>
-<div class="countdown-wrap">
-<p class="countdown-label">
+
+    </div>
+
+    <div class="countdown-wrap">
+
+      <p class="countdown-label">
         Faltan
       </p>
-<div class="countdown">
-<div>
-<strong id="days">0</strong>
-<span>Días</span>
-</div>
-<div>
-<strong id="hours">0</strong>
-<span>Horas</span>
-</div>
-<div>
-<strong id="minutes">0</strong>
-<span>Minutos</span>
-</div>
-<div>
-<strong id="seconds">0</strong>
-<span>Segundos</span>
-</div>
-</div>
-</div>
-</section>
-<!-- HISTORIA -->
-<section class="section story-section reveal">
-<div class="section-heading">
-<p class="eyebrow">Nuestra historia</p>
-<h2>
+
+      <div class="countdown">
+
+        <div>
+          <strong id="days">0</strong>
+          <span>Días</span>
+        </div>
+
+        <div>
+          <strong id="hours">0</strong>
+          <span>Horas</span>
+        </div>
+
+        <div>
+          <strong id="minutes">0</strong>
+          <span>Minutos</span>
+        </div>
+
+        <div>
+          <strong id="seconds">0</strong>
+          <span>Segundos</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- HISTORIA -->
+
+  <section class="section story-section reveal">
+
+    <div class="section-heading">
+
+      <p class="eyebrow">Nuestra historia</p>
+
+      <h2>
         Un amor que creció con el tiempo
       </h2>
 
-</div>
-<p class="story-intro">
+    </div>
+
+    <p class="story-intro">
       Después de miles de mates, viajes, cumpleaños, desafíos, abrazos y 13 años de elegirnos, llegó el momento de escribir un nuevo capítulo.
     </p>
-<div class="timeline">
-<article>
-<span class="year">2013</span>
-<h3>El comienzo</h3>
-<p>Comenzó nuestra historia.</p>
-</article>
-<article>
-<span class="year">2021</span>
-<h3>El compromiso</h3>
-<p>Elegimos un para siempre.</p>
-</article>
-<article>
-<span class="year">2026</span>
-<h3>El gran día</h3>
-<p>Llegó el momento de decir sí.</p>
-</article>
-</div>
-<div class="story-grid">
-<article class="story-row">
-<div class="story-photo first">
-<img alt="Primera foto de Fernando y Florencia" src="foto-2013.jpg"/>
-</div>
-<div class="story-copy">
-<span class="year-small">2013</span>
-<h3>
+
+    <div class="timeline">
+
+      <article>
+        <span class="year">2013</span>
+        <h3>El comienzo</h3>
+        <p>Comenzó nuestra historia.</p>
+      </article>
+
+      <article>
+        <span class="year">2021</span>
+        <h3>El compromiso</h3>
+        <p>Elegimos un para siempre.</p>
+      </article>
+
+      <article>
+        <span class="year">2026</span>
+        <h3>El gran día</h3>
+        <p>Llegó el momento de decir sí.</p>
+      </article>
+
+    </div>
+
+    <div class="story-grid">
+
+      <article class="story-row">
+
+        <div class="story-photo first">
+          <img
+            src="foto-2013.jpg"
+            alt="Primera foto de Fernando y Florencia"
+          >
+        </div>
+
+        <div class="story-copy">
+
+          <span class="year-small">2013</span>
+
+          <h3>
             Todo comenzó acá
           </h3>
-<p>
+
+          <p>
             Un encuentro que, sin saberlo, iba a cambiar nuestras vidas para siempre.
           </p>
-</div>
-</article>
-<article class="story-row reverse">
-<div class="story-photo pool">
-<img alt="Fernando y Florencia jugando al pool" src="foto-pool.jpg"/>
-</div>
-<div class="story-copy">
-<span class="year-small">Nuestro camino</span>
-<h3>
+
+        </div>
+
+      </article>
+
+      <article class="story-row reverse">
+
+        <div class="story-photo pool">
+          <img
+            src="foto-pool.jpg"
+            alt="Fernando y Florencia jugando al pool"
+          >
+        </div>
+
+        <div class="story-copy">
+
+          <span class="year-small">Nuestro camino</span>
+
+          <h3>
             Fuimos construyendo nuestro lugar
           </h3>
-<p>
+
+          <p>
             Entre risas, proyectos, desafíos y miles de momentos compartidos, elegimos caminar siempre juntos.
           </p>
-</div>
-</article>
-<article class="story-row">
-<div class="story-photo">
-<img alt="Fernando y Florencia junto al río" src="foto-rio.jpg"/>
-</div>
-<div class="story-copy">
-<span class="year-small">Hoy</span>
-<h3>
+
+        </div>
+
+      </article>
+
+      <article class="story-row">
+
+        <div class="story-photo">
+          <img
+            src="foto-rio.jpg"
+            alt="Fernando y Florencia junto al río"
+          >
+        </div>
+
+        <div class="story-copy">
+
+          <span class="year-small">Hoy</span>
+
+          <h3>
             Un nuevo capítulo
           </h3>
-<p>
+
+          <p>
             Queremos celebrar este momento junto a las personas que fueron parte de nuestra historia.
           </p>
-</div>
-</article>
-</div>
-<blockquote class="story-quote">
+
+        </div>
+
+      </article>
+
+    </div>
+
+    <blockquote class="story-quote">
       Lo mejor de nuestra historia todavía está por escribirse.
     </blockquote>
-</section>
-<!-- LUGARES -->
-<section class="locations-section reveal">
-<div class="locations-inner">
-<div class="section-heading">
-<p class="eyebrow">El gran día</p>
-<h2>
+
+  </section>
+
+  <!-- LUGARES -->
+
+  <section class="locations-section reveal">
+
+    <div class="locations-inner">
+
+      <div class="section-heading">
+
+        <p class="eyebrow">El gran día</p>
+
+        <h2>
           La ceremonia y la celebración
         </h2>
 
-</div>
-<div class="locations-grid">
-<article class="location-card">
-<div class="location-icon">♢</div>
-<p class="eyebrow">Ceremonia</p>
-<h3>
+      </div>
+
+      <div class="locations-grid">
+
+        <article class="location-card">
+
+          <div class="location-icon">♢</div>
+
+          <p class="eyebrow">Ceremonia</p>
+
+          <h3>
             Parroquia San Francisco Solano
           </h3>
-<div class="image-frame">
-<img alt="Ilustración de la Parroquia San Francisco Solano" src="parroquia-acuarela.png"/>
-</div>
-<p class="time">
+
+          <div class="image-frame">
+
+            <img
+              src="parroquia-acuarela.png"
+              alt="Ilustración de la Parroquia San Francisco Solano"
+            >
+
+          </div>
+
+          <p class="time">
             20:00 hs
           </p>
-<p class="address">
+
+          <p class="address">
             Bella Vista, Buenos Aires
           </p>
-<a class="button outline" href="https://www.google.com/maps/place/Parroquia+San+Francisco+Solano/@-34.5664646,-58.6962505,16z/data=!4m15!1m8!3m7!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!2sParroquia+San+Francisco+Solano!8m2!3d-34.566486!4d-58.6962208!10e5!16s%2Fg%2F1tdc6dxr!3m5!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!8m2!3d-34.566486!4d-58.6962208!16s%2Fg%2F" rel="noopener" target="_blank">
+
+          <a
+            class="button outline"
+            href="https://www.google.com/maps/place/Parroquia+San+Francisco+Solano/@-34.5664646,-58.6962505,16z/data=!4m15!1m8!3m7!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!2sParroquia+San+Francisco+Solano!8m2!3d-34.566486!4d-58.6962208!10e5!16s%2Fg%2F1tdc6dxr!3m5!1s0x95bcbdb58c60d7bb:0xa5941f9b369056dd!8m2!3d-34.566486!4d-58.6962208!16s%2Fg%2F"
+            target="_blank"
+            rel="noopener"
+          >
             Cómo llegar
           </a>
-</article>
-<article class="location-card">
-<div class="location-icon">♢</div>
-<p class="eyebrow">Recepción y fiesta</p>
-<h3>
+
+        </article>
+
+        <article class="location-card">
+
+          <div class="location-icon">♢</div>
+
+          <p class="eyebrow">Recepción y fiesta</p>
+
+          <h3>
             Eventos El Argentino
           </h3>
-<div class="image-frame">
-<img alt="Ilustración de Eventos El Argentino" src="salon-acuarela.png"/>
-</div>
-<p class="time">
+
+          <div class="image-frame">
+
+            <img
+              src="salon-acuarela.png"
+              alt="Ilustración de Eventos El Argentino"
+            >
+
+          </div>
+
+          <p class="time">
             21:00 hs
           </p>
-<p class="address">
+
+          <p class="address">
             Bella Vista, Buenos Aires
           </p>
-<a class="button outline" href="https://www.google.com/maps/place/Eventos+El+Argentino+-+Sal%C3%B3n+De+Eventos/@-34.5578472,-58.6793506,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcbc465bc14427:0x7ce236abf75d2f3b!8m2!3d-34.5578472!4d-58.6767703!16s%2Fg%2F11bbrn5mhs?entry=ttu&amp;g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D" rel="noopener" target="_blank">
+
+          <a
+            class="button outline"
+            href="https://www.google.com/maps/place/Eventos+El+Argentino+-+Sal%C3%B3n+De+Eventos/@-34.5578472,-58.6793506,17z/data=!3m1!4b1!4m6!3m5!1s0x95bcbc465bc14427:0x7ce236abf75d2f3b!8m2!3d-34.5578472!4d-58.6767703!16s%2Fg%2F11bbrn5mhs?entry=ttu&g_ep=EgoyMDI2MDcwOC4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener"
+          >
             Cómo llegar
           </a>
-</article>
-</div>
-</div>
-</section>
-<!-- INFORMACIÓN -->
-<section class="section info-section reveal">
-<article class="info-card">
-<div class="info-icon">◇</div>
-<p class="eyebrow">Dress code</p>
-<h2>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- INFORMACIÓN -->
+
+  <section class="section info-section reveal">
+
+    <article class="info-card">
+
+      <div class="info-icon">◇</div>
+
+      <p class="eyebrow">Dress code</p>
+
+      <h2>
         Elegante
       </h2>
-<p>
+
+      <p>
         El blanco y los tonos muy claros quedan reservados para la novia.
       </p>
-</article>
-<article class="info-card adults">
-<div class="info-icon">♡</div>
-<p class="eyebrow">Una pequeña aclaración</p>
-<h2>
+
+    </article>
+
+    <article class="info-card adults">
+
+      <div class="info-icon">♡</div>
+
+      <p class="eyebrow">Una pequeña aclaración</p>
+
+      <h2>
         Evento exclusivo para adultos
       </h2>
-<p>
+
+      <p>
         Queremos que esta noche sea inolvidable y que puedan disfrutarla de principio a fin. Como será una fiesta larga, sabemos que puede resultar agotadora para los más chiquitos. Por este motivo decidimos que la celebración sea exclusiva para adultos. Esperamos que puedan relajarse, divertirse y quedarse con nosotros hasta el final.
       </p>
-</article>
-</section>
-<!-- REGALO -->
-<section class="gift-section reveal">
-<article class="gift-card">
-<p class="eyebrow">Nuestra luna de miel</p>
-<h2>
+
+    </article>
+
+  </section>
+
+  <!-- REGALO -->
+
+  <section class="gift-section reveal">
+
+    <article class="gift-card">
+
+      <p class="eyebrow">Nuestra luna de miel</p>
+
+      <h2>
         Tu presencia es nuestro mejor regalo
       </h2>
-<p>
+
+      <p>
         Si además querés acompañarnos en el comienzo de esta nueva aventura, podés hacerlo mediante el siguiente alias.
       </p>
-<div class="alias-card">
-<span class="alias-label">
+
+      <div class="alias-card">
+
+        <span class="alias-label">
           Alias
         </span>
-<strong>
+
+        <strong>
           FERYFLOR.BODA
         </strong>
-<button class="button outline" id="copyAlias" type="button">
+
+        <button
+          class="button outline"
+          id="copyAlias"
+          type="button"
+        >
           Copiar alias
         </button>
-</div>
-</article>
-</section>
-<!-- INSTAGRAM -->
-<section class="section instagram reveal">
-<p class="eyebrow">
+
+      </div>
+
+    </article>
+
+  </section>
+
+  <!-- INSTAGRAM -->
+
+  <section class="section instagram reveal">
+
+    <p class="eyebrow">
       Compartamos los recuerdos
     </p>
-<h2>
+
+    <h2>
       @feryflor.boda
     </h2>
-<p>
+
+    <p>
       Seguí los preparativos y compartí con nosotros los mejores momentos.
     </p>
-<a class="button outline" href="https://www.instagram.com/feryflor.boda/" rel="noopener" target="_blank">
+
+    <a
+      class="button outline"
+      href="https://www.instagram.com/feryflor.boda/"
+      target="_blank"
+      rel="noopener"
+    >
       Abrir Instagram
     </a>
-</section>
-<!-- CONFIRMACIÓN -->
-<section class="section rsvp-section reveal" id="confirmar">
-<div class="section-heading">
-<p class="eyebrow">
+
+  </section>
+
+  <!-- CONFIRMACIÓN -->
+
+  <section class="section rsvp-section reveal" id="confirmar">
+
+    <div class="section-heading">
+
+      <p class="eyebrow">
         Confirmación de asistencia
       </p>
-<h2>
+
+      <h2>
         ¿Nos acompañás?
       </h2>
-<p>
+
+      <p>
         Tu respuesta es muy importante para nosotros.
       </p>
 
-</div>
-<div class="rsvp-shell">
-<div class="deadline">
-<strong>
+    </div>
+
+    <div class="rsvp-shell">
+
+      <div class="deadline">
+
+        <strong>
           Confirmá antes del 20 de agosto de 2026
         </strong>
-<p>
+
+        <p>
           Luego de esa fecha cerraremos la lista definitiva de invitados.
         </p>
-</div>
-<form id="rsvpForm">
-<div class="guest-choices" id="guestChoices"></div>
-<label class="form-label" for="song">
+
+      </div>
+
+      <form id="rsvpForm">
+
+        <div
+          id="guestChoices"
+          class="guest-choices"
+        ></div>
+
+        <label class="form-label" for="song">
           ¿Qué canción no puede faltar en la fiesta?
         </label>
-<input id="song" maxlength="120" placeholder="Canción y artista" type="text"/>
-<label class="form-label" for="food">
+
+        <input
+          id="song"
+          type="text"
+          maxlength="120"
+          placeholder="Canción y artista"
+        >
+
+        <label class="form-label" for="food">
           ¿Tenés alguna alergia o restricción alimentaria?
         </label>
-<textarea id="food" maxlength="300" placeholder="Opcional" rows="3"></textarea>
-<button class="button primary submit" id="submitRsvp" type="submit">
+
+        <textarea
+          id="food"
+          rows="3"
+          maxlength="300"
+          placeholder="Opcional"
+        ></textarea>
+
+        <button
+          class="button primary submit"
+          id="submitRsvp"
+          type="submit"
+        >
           Enviar confirmación
         </button>
-<p class="form-message" id="formMessage"></p>
-</form>
-<div class="whatsapp-choice" hidden="" id="whatsappChoice">
-<p>
+
+        <p
+          id="formMessage"
+          class="form-message"
+        ></p>
+
+      </form>
+
+      <div
+        id="whatsappChoice"
+        class="whatsapp-choice"
+        hidden
+      >
+
+        <p>
           La respuesta ya quedó guardada. También podés enviarnos el mensaje por WhatsApp:
         </p>
-<div>
-<a class="button outline" id="sendFlor" rel="noopener" target="_blank">
+
+        <div>
+
+          <a
+            id="sendFlor"
+            class="button outline"
+            target="_blank"
+            rel="noopener"
+          >
             Enviar a Florencia
           </a>
-<a class="button outline" id="sendFer" rel="noopener" target="_blank">
+
+          <a
+            id="sendFer"
+            class="button outline"
+            target="_blank"
+            rel="noopener"
+          >
             Enviar a Fernando
           </a>
-</div>
-</div>
-</div>
-</section>
-<!-- CIERRE -->
-<section class="closing">
-<img alt="Fernando y Florencia riendo juntos" src="foto-risas.jpeg"/>
-<div class="closing-copy">
-<p class="eyebrow">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CIERRE -->
+
+  <section class="closing">
+
+    <img
+      src="foto-risas.jpeg"
+      alt="Fernando y Florencia riendo juntos"
+    >
+
+    <div class="closing-copy">
+
+      <p class="eyebrow">
         Gracias
       </p>
-<h2>
+
+      <h2>
         No vemos la hora de compartir este día con ustedes.
       </h2>
-<p>
+
+      <p>
         Los esperamos el 16 de octubre de 2026.
       </p>
-<p class="last-line">
-        Fernando &amp; Florencia
+
+      <p class="last-line">
+        Fernando & Florencia
       </p>
 
-</div>
-</section>
-<!-- FOOTER -->
-<footer>
-<p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
       ¿Tenés alguna consulta?
     </p>
-<div class="contact-links">
-<a href="https://wa.me/5491132937869?text=Hola%20Flor%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." rel="noopener" target="_blank">
+
+    <div class="contact-links">
+
+      <a
+        href="https://wa.me/5491132937869?text=Hola%20Flor%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento."
+        target="_blank"
+        rel="noopener"
+      >
         Hablar con Florencia
       </a>
-<a href="https://wa.me/5491134173998?text=Hola%20Fer%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento." rel="noopener" target="_blank">
+
+      <a
+        href="https://wa.me/5491134173998?text=Hola%20Fer%2C%20tengo%20una%20consulta%20sobre%20el%20casamiento."
+        target="_blank"
+        rel="noopener"
+      >
         Hablar con Fernando
       </a>
-</div>
-</footer>
+
+    </div>
+
+  </footer>
+
 </main>
+
 <!-- MÚSICA -->
-<audio id="weddingMusic" loop="" preload="auto" src="perfect.mp3"></audio>
-<button aria-label="Controlar música" class="music-toggle" hidden="" id="musicToggle" type="button">
-<span>♫</span>
-<span class="music-label">Nuestra canción</span>
+
+<audio
+  id="weddingMusic"
+  src="perfect.mp3"
+  preload="auto"
+  loop
+></audio>
+
+<button
+  id="musicToggle"
+  class="music-toggle"
+  type="button"
+  hidden
+  aria-label="Controlar música"
+>
+  <span>♫</span>
+  <span class="music-label">Nuestra canción</span>
 </button>
+
 <script>
 const CONFIG = {
   apiUrl: "https://script.google.com/macros/s/AKfycbzyzBosc5vZuswg8nY3X-6YGPr3zQBZJaPjuEptmejU7qtqvhmMP_9-M-OYpB03XEckeQ/exec",
@@ -2399,9 +2718,10 @@ document
   .querySelectorAll(".reveal")
   .forEach(element => observer.observe(element));
 </script>
+
 </body>
 </html>
-document.querySelectorAll(".reveal").forEach(el=&gt;ob.observe(el));
-
-
-
+document.querySelectorAll(".reveal").forEach(el=>ob.observe(el));
+</script>
+</body>
+</html>
