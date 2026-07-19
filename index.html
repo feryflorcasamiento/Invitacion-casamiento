@@ -863,11 +863,19 @@ const CONFIG = {
 
 const $ = selector => document.querySelector(selector);
 
-const invitationId =
-  new URLSearchParams(location.search).get("id") || "001";
+const params = new URLSearchParams(location.search);
+const pathSlug = decodeURIComponent(location.pathname)
+  .replace(/^\/+|\/+$/g, "")
+  .split("/")
+  .filter(Boolean)
+  .pop() || "";
+
+// Admite enlaces nuevos (/juan-perez) y los enlaces viejos (?id=001).
+const invitationKey = pathSlug || params.get("slug") || params.get("id") || "001";
 
 let guestData = {
-  id: invitationId,
+  id: params.get("id") || "001",
+  slug: pathSlug || params.get("slug") || "",
   guests: ["Invitado 1", "Invitado 2", "", ""]
 };
 
@@ -1080,7 +1088,7 @@ function loadGuest() {
     document.createElement("script");
 
   script.src =
-    `${CONFIG.apiUrl}?action=getGuest&id=${encodeURIComponent(invitationId)}&callback=receiveGuest`;
+    `${CONFIG.apiUrl}?action=getGuest&key=${encodeURIComponent(invitationKey)}&callback=receiveGuest`;
 
   script.onerror = () => {
 

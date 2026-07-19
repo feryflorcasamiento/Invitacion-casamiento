@@ -1,0 +1,24 @@
+ENLACES PERSONALIZADOS — MISMA GOOGLE SHEETS
+
+1. En tu Google Sheet abrí: Extensiones > Apps Script.
+2. Reemplazá el código anterior por el archivo apps-script.gs incluido en este proyecto.
+3. Guardá.
+4. Ejecutá una vez la función crearEnlacesPersonalizados y aceptá los permisos.
+   También aparecerá en la planilla el menú: Invitaciones > Crear enlaces personalizados.
+5. La misma hoja agregará al final dos columnas:
+   Slug | Link personalizado
+6. Volvé a Apps Script y elegí:
+   Implementar > Administrar implementaciones > Editar > Nueva versión > Implementar.
+7. En Vercel subí también vercel.json junto con index.html y las imágenes.
+
+Ejemplos de enlaces:
+https://fernandoyflorencia.vercel.app/juan-perez
+https://fernandoyflorencia.vercel.app/maria-y-carlos
+
+Los enlaces viejos con ?id=001 siguen funcionando.
+El RSVP continúa guardándose en la misma fila de la misma Google Sheets.
+
+IMPORTANTE:
+- La fila 1 debe conservar estos encabezados:
+  ID | Invitado 1 | Invitado 2 | Invitado 3 | Invitado 4 | Asiste 1 | Asiste 2 | Asiste 3 | Asiste 4 | Total | Canción | Restricciones | Fecha | Estado
+- Si tu hoja no se llama “Hoja 1”, cambiá SHEET_NAME al inicio de apps-script.gs.
